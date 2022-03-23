@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"naruseshiroha.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"検索…","empty":"検索結果が見つかりませんでした: ${query}","hits_time":"${hits} の結果が ${time} ms で見つかりました","hits":"${hits} 件の結果が見つかりました"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Docker的常用命令帮助命令docker version # 显示 docker 的版本信息 docker info # 显示 docker 的系统信息，包括镜像和容器数量 docker 命令 --help  帮助文档的地址：https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;commandline 镜像命令docker images 查看所有本地的主机上的镜像 U">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker的常用命令">
+<meta property="og:url" content="https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Gawr Gura">
+<meta property="og:description" content="Docker的常用命令帮助命令docker version # 显示 docker 的版本信息 docker info # 显示 docker 的系统信息，包括镜像和容器数量 docker 命令 --help  帮助文档的地址：https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;commandline 镜像命令docker images 查看所有本地的主机上的镜像 U">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://naruseshiroha.github.io/images/docker/docker-command.jpg">
+<meta property="article:published_time" content="2022-01-25T06:24:48.000Z">
+<meta property="article:modified_time" content="2022-03-23T09:06:05.935Z">
+<meta property="article:author" content="Gawr Gura">
+<meta property="article:tag" content="命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://naruseshiroha.github.io/images/docker/docker-command.jpg">
+
+
+<link rel="canonical" href="https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"ja","comments":true,"permalink":"https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/","path":"2022/01/25/Docker的常用命令/","title":"Docker的常用命令"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Docker的常用命令 | Gawr Gura</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="ナビゲーションバーの切り替え" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Gawr Gura</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Japanese Learning</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>ホーム</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>タグ</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>カテゴリ</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>アーカイブ</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>検索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="検索…" spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          見出し
+        </li>
+        <li class="sidebar-nav-overview">
+          概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">Docker的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">帮助命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">镜像命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">容器命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-number">1.4.</span> <span class="nav-text">常用其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-exec-attach"><span class="nav-number">1.4.1.</span> <span class="nav-text">docker exec&#x2F;attach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gawr Gura"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gawr Gura</p>
+  <div class="site-description" itemprop="description">あ、サメです。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">292</span>
+          <span class="site-state-item-name">ポスト</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">カテゴリ</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">245</span>
+        <span class="site-state-item-name">タグ</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/naruseshiroha" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;naruseshiroha" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/_kamiyamashiki" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;_kamiyamashiki" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/shiroha_naruse" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;shiroha_naruse" rel="noopener" target="_blank"><i class="fab fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/reollllllll/" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;reollllllll&#x2F;" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.yxdm.li/" title="https:&#x2F;&#x2F;www.yxdm.li&#x2F;" rel="noopener" target="_blank">YXDM</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.dm233.cc/" title="https:&#x2F;&#x2F;www.dm233.cc&#x2F;" rel="noopener" target="_blank">DM233</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://fanxinzhui.com/" title="http:&#x2F;&#x2F;fanxinzhui.com&#x2F;" rel="noopener" target="_blank">ZXF</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="ja">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker的常用命令<a href="https://github.com/naruseshiroha/Blog/tree/main/source/_posts/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.md" class="post-edit-link" title="この記事を編集する" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2022-01-25 15:24:48" itemprop="dateCreated datePublished" datetime="2022-01-25T15:24:48+09:00">2022-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-03-23 18:06:05" itemprop="dateModified" datetime="2022-03-23T18:06:05+09:00">2022-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>29 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Docker的常用命令"><a href="#Docker的常用命令" class="headerlink" title="Docker的常用命令"></a>Docker的常用命令</h1><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><pre class="language-shell" data-language="shell"><code class="language-shell">docker version # 显示 docker 的版本信息
+docker info # 显示 docker 的系统信息，包括镜像和容器数量
+docker 命令 --help</code></pre>
+
+<p>帮助文档的地址：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline">https://docs.docker.com/engine/reference/commandline</a></p>
+<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><p><strong>docker images</strong> 查看所有本地的主机上的镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage: docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+List images
+
+Options:
+  -a, --all             # Show all images (default hides intermediate images)
+      --digests         # Show digests
+  -f, --filter filter   # Filter output based on conditions provided
+      --format string   # Pretty-print images using a Go template
+      --no-trunc        # Don&#39;t truncate output
+  -q, --quiet           # Only show image IDs
+
+
+[lixun@aliecs ~]$ sudo docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   4 months ago   13.3kB
+
+# 解释
+REPOSITORY      # 镜像的仓库源
+TAG             # 镜像的标签
+IMAGE ID        # 镜像的ID
+CREATED         # 镜像的创建时间
+SIZE            # 镜像的大小
+</code></pre>
+
+<p><strong>docker search</strong> 搜索镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker search [OPTIONS] TERM
+
+Search the Docker Hub for images
+
+Options:
+  -f, --filter filter   # Filter output based on conditions provided
+      --format string   # Pretty-print search using a Go template
+      --limit int       # Max number of search results (default 25)
+      --no-trunc        # Don&#39;t truncate output
+
+[lixun@aliecs ~]$ sudo docker search mysql
+NAME             DESCRIPTION                             STARS   OFFICIAL  AUTOMATED
+mysql    MySQL is a widely used, open-source relation…   12013     [OK]       
+mariadb  MariaDB Server is a high performing open sou…   4603      [OK] 
+</code></pre>
+
+<p><strong>docker pull</strong> 下载镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+Options:
+  -a, --all-tags                # Download all tagged images in the repository
+      --disable-content-trust   # Skip image verification (default true)
+      --platform string         # Set platform if server is multi-platform capable
+  -q, --quiet                   # Suppress verbose output
+
+
+[lixun@aliecs ~]$ sudo docker pull mysql
+Using default tag: latest # 不指定 tag，默认 latest
+latest: Pulling from library&#x2F;mysql
+72a69066d2fe: Pull complete # 分层下载，docker images 的核心 联合文件系统
+93619dbc5b36: Pull complete 
+99da31dd6142: Pull complete 
+e5c707858ec0: Pull complete 
+fc41578cbf60: Pull complete 
+4785d896ef10: Pull complete 
+7d250cdc93be: Pull complete 
+309700f41983: Pull complete 
+45fd33301836: Pull complete 
+92f970c68b71: Pull complete 
+bb3544339a9e: Pull complete 
+f66ddf4c43fa: Pull complete 
+Digest: sha256:d0507b008897c39f6cbc76285af1171d4551988475e00e91344060023cd9c553 # 签名
+Status: Downloaded newer image for mysql:latest
+docker.io&#x2F;library&#x2F;mysql:latest # 真实地址
+
+# 
+docker pull mysql ↔ docker pull docker.io&#x2F;library&#x2F;mysql:latest
+
+# 指定 tag
+[lixun@aliecs ~]$ sudo docker pull mysql:5.7
+5.7: Pulling from library&#x2F;mysql
+72a69066d2fe: Already exists 
+93619dbc5b36: Already exists 
+99da31dd6142: Already exists 
+e5c707858ec0: Already exists 
+fc41578cbf60: Already exists 
+4785d896ef10: Already exists 
+7d250cdc93be: Already exists 
+2efe6ef3579a: Pull complete 
+40dc4a5ca43a: Pull complete 
+cd6f90222f59: Pull complete 
+031e631e9021: Pull complete 
+Digest: sha256:66480693e01295d85954bb5dbe2f41f29ebceb57d3d8098ea0c9d201473f2d8b
+Status: Downloaded newer image for mysql:5.7
+docker.io&#x2F;library&#x2F;mysql:5.7
+</code></pre>
+
+<p><strong>docker rmi</strong> 删除镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+
+Options:
+  -f, --force      # Force removal of the image
+      --no-prune   # Do not delete untagged parents
+
+[lixun@aliecs ~]$ docker rmi -f 42f82e150ec2 # 删除指定
+[lixun@aliecs ~]$ docker rmi -f 42f82e150ec2 feb5d9fea6a5 # 删除多个
+[lixun@aliecs ~]$ docker rmi -f $(dcoker images -aq) # 删除所有容器</code></pre>
+
+<span id="more"></span>
+
+<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p><strong>说明：</strong> 我们有了镜像才可以创建容器，linux，下载一个 centos 镜像来测试学习。</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">docker pull centos</code></pre>
+
+<p><strong>新建容器并启动</strong></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+Options:
+  -d               # Run container in background and print container ID
+  -i               # Keep STDIN open even if not attached
+  -t               # Allocate a pseudo-TTY
+  -p               # Publish a container&#39;s port(s) to the host
+	  -p ip:主机端口:容器端口
+	  -p 主机端口:容器端口（常用）
+	  -p 容器端口
+	  容器端口
+  -P               # Publish all exposed ports to random ports
+
+# 测试，启动并进入容器
+[lixun@aliecs ~]$ docker run -it centos &#x2F;bin&#x2F;bash
+[root@24b0ac2ec11e &#x2F;]# ls
+bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+# 从容器中退出
+[root@50ef0c49f5f7 &#x2F;]# exit
+exit
+[lixun@aliecs ~]$ </code></pre>
+
+<p><strong>docker ps</strong> 列出运行的容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker ps [OPTIONS]
+
+List containers
+
+Options:
+  -a, --all             # Show all containers (default shows just running)
+  -f, --filter filter   # Filter output based on conditions provided
+      --format string   # Pretty-print containers using a Go template
+  -n, --last int        # Show n last created containers (includes all states) (default -1)
+  -l, --latest          # Show the latest created container (includes all states)
+      --no-trunc        # Don&#39;t truncate output
+  -q, --quiet           # Only display container IDs
+  -s, --size            # Display total file sizes
+
+
+[lixun@aliecs ~]$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND       CREATED              STATUS                      PORTS     NAMES
+50ef0c49f5f7   centos        &quot;&#x2F;bin&#x2F;bash&quot;   39 seconds ago       Exited (0) 35 seconds ago             sad_goldstine
+24b0ac2ec11e   centos        &quot;&#x2F;bin&#x2F;bash&quot;   About a minute ago   Exited (0) 51 seconds ago             unruffled_haslett
+65b86207336f   hello-world   &quot;&#x2F;hello&quot;      2 hours ago          Exited (0) 2 hours ago                beautiful_shannon</code></pre>
+
+<p><strong>退出容器</strong></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">exit # 停止并退出容器
+Ctrl + p + q # 不停止退出容器</code></pre>
+
+<p><strong>docker rm</strong> 删除容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+Remove one or more containers
+
+Options:
+  -f, --force     Force the removal of a running container (uses SIGKILL)
+  -l, --link      Remove the specified link
+  -v, --volumes   Remove anonymous volumes associated with the container
+
+[lixun@aliecs ~]$ docker rm 65b86207336f
+65b86207336f
+[lixun@aliecs ~]$ docker rm -f $(docker ps -aq)
+[lixun@aliecs ~]$ docker ps -a -q|xargs docker rm</code></pre>
+
+<p><strong>docker start/restart/stop/kill</strong> 启动和停止容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># docker start
+Usage:  docker start [OPTIONS] CONTAINER [CONTAINER...]
+
+Start one or more stopped containers
+
+Options:
+  -a, --attach               # Attach STDOUT&#x2F;STDERR and forward signals
+      --detach-keys string   # Override the key sequence for detaching a container
+  -i, --interactive          # Attach container&#39;s STDIN
+
+# docker restart
+Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
+
+Restart one or more containers
+
+Options:
+  -t, --time int   # Seconds to wait for stop before killing the container (default 10)
+
+# docker stop
+Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Stop one or more running containers
+
+Options:
+  -t, --time int   
+
+# docker kill
+Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+Kill one or more running containers
+
+Options:
+  -s, --signal string   Signal to send to the container (default &quot;KILL&quot;)</code></pre>
+
+<h2 id="常用其他命令"><a href="#常用其他命令" class="headerlink" title="常用其他命令"></a>常用其他命令</h2><p><strong>docker run -d</strong> 后台启动</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs ~]$ docker run -d centos
+9a708d24af2008a43362f63b7442d987cda0da670457940b78c6e0c9a4048875
+[lixun@aliecs ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+# docker 容器使用后台运行，就必须要有一个前台进程，否则，docker 发现没有应用，就会自动停止</code></pre>
+
+<p><strong>docker logs</strong> 查看日志</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker logs [OPTIONS] CONTAINER
+
+Fetch the logs of a container
+
+Options:
+      --details        # Show extra details provided to logs
+  -f, --follow         # Follow log output
+      --since string   # Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+  -n, --tail string    # Number of lines to show from the end of the logs (default &quot;all&quot;)
+  -t, --timestamps     # Show timestamps
+      --until string   # Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+
+# 显示日志
+[lixun@aliecs ~]$ docker logs -tf --tail 10 f8ccaa7fc83e</code></pre>
+
+<p><strong>docker top</strong> 查看容器中进程信息</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker top CONTAINER [ps OPTIONS]
+
+Display the running processes of a container
+
+[lixun@aliecs ~]$ docker top f8ccaa7fc83e
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                500045              500027              0                   17:22               ?                   00:00:01            &#x2F;bin&#x2F;sh -c while true;do echo Jun;sleep 1;done
+root                758783              500045              0                   18:22               ?                   00:00:00            &#x2F;usr&#x2F;bin&#x2F;coreutils --coreutils-prog-shebang&#x3D;sleep &#x2F;usr&#x2F;bin&#x2F;sleep 1</code></pre>
+
+<p><strong>docker inspect</strong> 查看镜像的元数据</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+
+Return low-level information on Docker objects
+
+Options:
+  -f, --format string   # Format the output using the given Go template
+  -s, --size            # Display total file sizes if the type is container
+      --type string     # Return JSON for specified type
+
+
+[lixun@aliecs ~]$ docker inspect f8ccaa7fc83e
+[
+    &#123;
+        &quot;Id&quot;: &quot;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7&quot;,
+        &quot;Created&quot;: &quot;2022-01-25T09:22:24.781056836Z&quot;,
+        &quot;Path&quot;: &quot;&#x2F;bin&#x2F;sh&quot;,
+        &quot;Args&quot;: [
+            &quot;-c&quot;,
+            &quot;while true;do echo Jun;sleep 1;done&quot;
+        ],
+        &quot;State&quot;: &#123;
+            &quot;Status&quot;: &quot;running&quot;,
+            &quot;Running&quot;: true,
+            &quot;Paused&quot;: false,
+            &quot;Restarting&quot;: false,
+            &quot;OOMKilled&quot;: false,
+            &quot;Dead&quot;: false,
+            &quot;Pid&quot;: 500045,
+            &quot;ExitCode&quot;: 0,
+            &quot;Error&quot;: &quot;&quot;,
+            &quot;StartedAt&quot;: &quot;2022-01-25T09:22:25.096385211Z&quot;,
+            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        &#125;,
+        &quot;Image&quot;: &quot;sha256:5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6&quot;,
+        &quot;ResolvConfPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7&#x2F;resolv.conf&quot;,
+        &quot;HostnamePath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7&#x2F;hostname&quot;,
+        &quot;HostsPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7&#x2F;hosts&quot;,
+        &quot;LogPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7&#x2F;f8ccaa7fc83e8a48b31e524caeef650422d8290c2520e871f73c54a0691d2bb7-json.log&quot;,
+        &quot;Name&quot;: &quot;&#x2F;nostalgic_torvalds&quot;,
+        &quot;RestartCount&quot;: 0,
+        &quot;Driver&quot;: &quot;overlay2&quot;,
+        &quot;Platform&quot;: &quot;linux&quot;,
+        &quot;MountLabel&quot;: &quot;&quot;,
+        &quot;ProcessLabel&quot;: &quot;&quot;,
+        &quot;AppArmorProfile&quot;: &quot;&quot;,
+        &quot;ExecIDs&quot;: null,
+        &quot;HostConfig&quot;: &#123;
+            &quot;Binds&quot;: null,
+            &quot;ContainerIDFile&quot;: &quot;&quot;,
+            &quot;LogConfig&quot;: &#123;
+                &quot;Type&quot;: &quot;json-file&quot;,
+                &quot;Config&quot;: &#123;&#125;
+            &#125;,
+            &quot;NetworkMode&quot;: &quot;default&quot;,
+            &quot;PortBindings&quot;: &#123;&#125;,
+            &quot;RestartPolicy&quot;: &#123;
+                &quot;Name&quot;: &quot;no&quot;,
+                &quot;MaximumRetryCount&quot;: 0
+            &#125;,
+            &quot;AutoRemove&quot;: false,
+            &quot;VolumeDriver&quot;: &quot;&quot;,
+            &quot;VolumesFrom&quot;: null,
+            &quot;CapAdd&quot;: null,
+            &quot;CapDrop&quot;: null,
+            &quot;CgroupnsMode&quot;: &quot;host&quot;,
+            &quot;Dns&quot;: [],
+            &quot;DnsOptions&quot;: [],
+            &quot;DnsSearch&quot;: [],
+            &quot;ExtraHosts&quot;: null,
+            &quot;GroupAdd&quot;: null,
+            &quot;IpcMode&quot;: &quot;private&quot;,
+            &quot;Cgroup&quot;: &quot;&quot;,
+            &quot;Links&quot;: null,
+            &quot;OomScoreAdj&quot;: 0,
+            &quot;PidMode&quot;: &quot;&quot;,
+            &quot;Privileged&quot;: false,
+            &quot;PublishAllPorts&quot;: false,
+            &quot;ReadonlyRootfs&quot;: false,
+            &quot;SecurityOpt&quot;: null,
+            &quot;UTSMode&quot;: &quot;&quot;,
+            &quot;UsernsMode&quot;: &quot;&quot;,
+            &quot;ShmSize&quot;: 67108864,
+            &quot;Runtime&quot;: &quot;runc&quot;,
+            &quot;ConsoleSize&quot;: [
+                0,
+                0
+            ],
+            &quot;Isolation&quot;: &quot;&quot;,
+            &quot;CpuShares&quot;: 0,
+            &quot;Memory&quot;: 0,
+            &quot;NanoCpus&quot;: 0,
+            &quot;CgroupParent&quot;: &quot;&quot;,
+            &quot;BlkioWeight&quot;: 0,
+            &quot;BlkioWeightDevice&quot;: [],
+            &quot;BlkioDeviceReadBps&quot;: null,
+            &quot;BlkioDeviceWriteBps&quot;: null,
+            &quot;BlkioDeviceReadIOps&quot;: null,
+            &quot;BlkioDeviceWriteIOps&quot;: null,
+            &quot;CpuPeriod&quot;: 0,
+            &quot;CpuQuota&quot;: 0,
+            &quot;CpuRealtimePeriod&quot;: 0,
+            &quot;CpuRealtimeRuntime&quot;: 0,
+            &quot;CpusetCpus&quot;: &quot;&quot;,
+            &quot;CpusetMems&quot;: &quot;&quot;,
+            &quot;Devices&quot;: [],
+            &quot;DeviceCgroupRules&quot;: null,
+            &quot;DeviceRequests&quot;: null,
+            &quot;KernelMemory&quot;: 0,
+            &quot;KernelMemoryTCP&quot;: 0,
+            &quot;MemoryReservation&quot;: 0,
+            &quot;MemorySwap&quot;: 0,
+            &quot;MemorySwappiness&quot;: null,
+            &quot;OomKillDisable&quot;: false,
+            &quot;PidsLimit&quot;: null,
+            &quot;Ulimits&quot;: null,
+            &quot;CpuCount&quot;: 0,
+            &quot;CpuPercent&quot;: 0,
+            &quot;IOMaximumIOps&quot;: 0,
+            &quot;IOMaximumBandwidth&quot;: 0,
+            &quot;MaskedPaths&quot;: [
+                &quot;&#x2F;proc&#x2F;asound&quot;,
+                &quot;&#x2F;proc&#x2F;acpi&quot;,
+                &quot;&#x2F;proc&#x2F;kcore&quot;,
+                &quot;&#x2F;proc&#x2F;keys&quot;,
+                &quot;&#x2F;proc&#x2F;latency_stats&quot;,
+                &quot;&#x2F;proc&#x2F;timer_list&quot;,
+                &quot;&#x2F;proc&#x2F;timer_stats&quot;,
+                &quot;&#x2F;proc&#x2F;sched_debug&quot;,
+                &quot;&#x2F;proc&#x2F;scsi&quot;,
+                &quot;&#x2F;sys&#x2F;firmware&quot;
+            ],
+            &quot;ReadonlyPaths&quot;: [
+                &quot;&#x2F;proc&#x2F;bus&quot;,
+                &quot;&#x2F;proc&#x2F;fs&quot;,
+                &quot;&#x2F;proc&#x2F;irq&quot;,
+                &quot;&#x2F;proc&#x2F;sys&quot;,
+                &quot;&#x2F;proc&#x2F;sysrq-trigger&quot;
+            ]
+        &#125;,
+        &quot;GraphDriver&quot;: &#123;
+            &quot;Data&quot;: &#123;
+                &quot;LowerDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;a15cc0b70321bf767fe8adb6be2b880fa5cd69b69281d44485fd9fda2bb61d54-init&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;54dbc41ae4bb400857b4c12aa5eafd8e0a5eda05f4df63de082c0cfd34893d89&#x2F;diff&quot;,
+                &quot;MergedDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;a15cc0b70321bf767fe8adb6be2b880fa5cd69b69281d44485fd9fda2bb61d54&#x2F;merged&quot;,
+                &quot;UpperDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;a15cc0b70321bf767fe8adb6be2b880fa5cd69b69281d44485fd9fda2bb61d54&#x2F;diff&quot;,
+                &quot;WorkDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;a15cc0b70321bf767fe8adb6be2b880fa5cd69b69281d44485fd9fda2bb61d54&#x2F;work&quot;
+            &#125;,
+            &quot;Name&quot;: &quot;overlay2&quot;
+        &#125;,
+        &quot;Mounts&quot;: [],
+        &quot;Config&quot;: &#123;
+            &quot;Hostname&quot;: &quot;f8ccaa7fc83e&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin&quot;
+            ],
+            &quot;Cmd&quot;: [
+                &quot;&#x2F;bin&#x2F;sh&quot;,
+                &quot;-c&quot;,
+                &quot;while true;do echo Jun;sleep 1;done&quot;
+            ],
+            &quot;Image&quot;: &quot;centos&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: &#123;
+                &quot;org.label-schema.build-date&quot;: &quot;20210915&quot;,
+                &quot;org.label-schema.license&quot;: &quot;GPLv2&quot;,
+                &quot;org.label-schema.name&quot;: &quot;CentOS Base Image&quot;,
+                &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+                &quot;org.label-schema.vendor&quot;: &quot;CentOS&quot;
+            &#125;
+        &#125;,
+        &quot;NetworkSettings&quot;: &#123;
+            &quot;Bridge&quot;: &quot;&quot;,
+            &quot;SandboxID&quot;: &quot;aaf7aa6b37c9a6778f7e5b64d03dccdfc58d42ba99f30897497f1567fb1c8dc8&quot;,
+            &quot;HairpinMode&quot;: false,
+            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+            &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+            &quot;Ports&quot;: &#123;&#125;,
+            &quot;SandboxKey&quot;: &quot;&#x2F;var&#x2F;run&#x2F;docker&#x2F;netns&#x2F;aaf7aa6b37c9&quot;,
+            &quot;SecondaryIPAddresses&quot;: null,
+            &quot;SecondaryIPv6Addresses&quot;: null,
+            &quot;EndpointID&quot;: &quot;28c9c439cedd1e8248fc50470cbcfdfcb26418793ea9efb193cae82405593950&quot;,
+            &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+            &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+            &quot;GlobalIPv6PrefixLen&quot;: 0,
+            &quot;IPAddress&quot;: &quot;172.17.0.2&quot;,
+            &quot;IPPrefixLen&quot;: 16,
+            &quot;IPv6Gateway&quot;: &quot;&quot;,
+            &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,
+            &quot;Networks&quot;: &#123;
+                &quot;bridge&quot;: &#123;
+                    &quot;IPAMConfig&quot;: null,
+                    &quot;Links&quot;: null,
+                    &quot;Aliases&quot;: null,
+                    &quot;NetworkID&quot;: &quot;043a32cc1ae4d903bf1f54d1ab41d85e32cf1fb483167eff2754290443e33c7f&quot;,
+                    &quot;EndpointID&quot;: &quot;28c9c439cedd1e8248fc50470cbcfdfcb26418793ea9efb193cae82405593950&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+                    &quot;IPAddress&quot;: &quot;172.17.0.2&quot;,
+                    &quot;IPPrefixLen&quot;: 16,
+                    &quot;IPv6Gateway&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6PrefixLen&quot;: 0,
+                    &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,
+                    &quot;DriverOpts&quot;: null
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+]
+</code></pre>
+
+<h3 id="docker-exec-attach"><a href="#docker-exec-attach" class="headerlink" title="docker exec/attach"></a>docker exec/attach</h3><p><strong>docker exec</strong> 进入当前正在运行的容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Run a command in a running container
+
+Options:
+  -d, --detach               # Detached mode: run command in the background
+      --detach-keys string   # Override the key sequence for detaching a container
+  -e, --env list             # Set environment variables
+      --env-file list        # Read in a file of environment variables
+  -i, --interactive          # Keep STDIN open even if not attached
+      --privileged           # Give extended privileges to the command
+  -t, --tty                  # Allocate a pseudo-TTY
+  -u, --user string          # Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
+  -w, --workdir string       # Working directory inside the container
+
+# 
+[lixun@aliecs ~]$ docker exec -it f8ccaa7fc83e &#x2F;bin&#x2F;bash
+[root@f8ccaa7fc83e &#x2F;]# ls
+bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</code></pre>
+
+<p><strong>docker attach</strong> 进入当前正在运行的容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker attach [OPTIONS] CONTAINER
+
+Attach local standard input, output, and error streams to a running container
+
+Options:
+      --detach-keys string   # Override the key sequence for detaching a container
+      --no-stdin             # Do not attach STDIN
+      --sig-proxy            # Proxy all received signals to the process (default true)
+
+[lixun@aliecs ~]$ docker attach f8ccaa7fc83e
+Jun
+Jun
+Jun</code></pre>
+
+<p><strong>区别：</strong></p>
+<ul>
+<li><code>docker exec</code>：进入容器后开启一个新的终端，可以在里面操作（常用）</li>
+<li><code>docker attach</code>：进入容器正在执行的终端，不会启动新的进程！</li>
+</ul>
+<p><strong>docker cp</strong> 从容器拷贝文件到主机上</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs ~]$ docker cp --help
+
+Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+        docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+
+Copy files&#x2F;folders between a container and the local filesystem
+
+Use &#39;-&#39; as the source to read a tar archive from stdin
+and extract it to a directory destination in a container.
+Use &#39;-&#39; as the destination to stream a tar archive of a
+container source to stdout.
+
+Options:
+  -a, --archive       Archive mode (copy all uid&#x2F;gid information)
+  -L, --follow-link   Always follow symbol link in SRC_PATH
+
+[lixun@aliecs ~]$ docker attach e4d622db3323
+[root@e4d622db3323 &#x2F;]# ls 
+bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@e4d622db3323 &#x2F;]# cd home
+[root@e4d622db3323 home]# touch cp.java
+[root@e4d622db3323 home]# exit
+exit
+[lixun@aliecs ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+[lixun@aliecs ~]$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS                         PORTS     NAMES
+e4d622db3323   centos    &quot;&#x2F;bin&#x2F;bash&quot;   2 minutes ago   Exited (0) 5 seconds ago                 magical_lalande
+[lixun@aliecs ~]$ docker cp e4d622db3323:&#x2F;home&#x2F;cp.java &#x2F;home&#x2F;lixun&#x2F;
+[lixun@aliecs ~]$ ls
+cp.java
+
+# 拷贝是一个手动过程，未来我们使用 -v 卷的技术，可以实现同步</code></pre>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><a href=""><img src='/images/docker/docker-command.jpg' width='80%' /></a></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">attach      # Attach local standard input, output, and error streams to a running container
+build       # Build an image from a Dockerfile
+commit      # Create a new image from a container&#39;s changes
+cp          # Copy files&#x2F;folders between a container and the local filesystem</code></pre>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a cola</div>
+  <button>
+    寄付
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Gawr Gura WeChat 支払う">
+        <span>WeChat 支払う</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Gawr Gura Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>著者： </strong>Gawr Gura
+  </li>
+  <li class="post-copyright-link">
+      <strong>記事へのリンク：</strong>
+      <a href="https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Docker的常用命令">https://naruseshiroha.github.io/2022/01/25/Docker的常用命令/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>著作権表示： </strong>このブログ内のすべての記事は、特別な記載がない限り <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> の下のライセンスで保護されています。
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>他の公開チャンネルへようこそ</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/_kamiyamashiki">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/shiroha_naruse">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"># 命令</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E5%8A%9F%E8%83%BD%E7%94%A8%E8%AF%AD%C2%B7%E5%8F%A5%E5%9E%8B/" rel="prev" title="n3-重点语法-功能用语·句型">
+                  <i class="fa fa-chevron-left"></i> n3-重点语法-功能用语·句型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/27/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8B25%E7%94%9F%E8%AF%8D/" rel="next" title="新标日初下25生词">
+                  新标日初下25生词 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gawr Gura</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>単語の総数：</span>
+    <span title="単語の総数">551k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>読書の合計時間 &asymp;</span>
+    <span title="読書の合計時間">15:19</span>
+  </span>
+</div>
+
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js","integrity":"sha256-96rwDGMWIQYB0yKGp1sKi1yrjrLPj2oT39IpbCsIrsg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"naruseshiroha","repo":"my_gitalk","client_id":"d9d7d1224b9e0efc67aa","client_secret":"2c6b4e19f590dd5a96449ff4825020b2a2a1c2d1","admin_user":"naruseshiroha","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"en","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"42ce264a66ea1960692aff5098fbabee"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
