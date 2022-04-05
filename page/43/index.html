@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">310</span>
+          <span class="site-state-item-count">319</span>
           <span class="site-state-item-name">ポスト</span>
         </a>
       </div>
@@ -242,7 +242,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/25/%E4%B8%80%E7%AD%89%E5%87%BD%E6%95%B0%E4%B8%8EApplicative%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/07/n4-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -255,7 +255,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/25/%E4%B8%80%E7%AD%89%E5%87%BD%E6%95%B0%E4%B8%8EApplicative%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">一等函数与Applicative编程</a>
+          <a href="/2020/06/07/n4-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/" class="post-title-link" itemprop="url">n4-形式名词</a>
         </h2>
 
         <div class="post-meta-container">
@@ -266,7 +266,7 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2020-05-25 22:23:31" itemprop="dateCreated datePublished" datetime="2020-05-25T22:23:31+09:00">2020-05-25</time>
+      <time title="作成日：2020-06-07 10:11:15" itemprop="dateCreated datePublished" datetime="2020-06-07T10:11:15+09:00">2020-06-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
       </span>
       <span class="post-meta-item-text">カテゴリ</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
         </span>
     </span>
 
@@ -292,14 +292,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>8.3k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>14 分</span>
+      <span>6 分</span>
     </span>
 </div>
 
@@ -310,40 +310,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="一等函数与Applicative编程"><a href="#一等函数与Applicative编程" class="headerlink" title="一等函数与Applicative编程"></a>一等函数与Applicative编程</h1><h2 id="函数是一等公民"><a href="#函数是一等公民" class="headerlink" title="函数是一等公民"></a>函数是一等公民</h2><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 函数与数字一样可以存储为变量</span>
-<span class="token keyword">let</span> <span class="token function-variable function">foo</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">params</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 函数与数字一样可以存储为数组的一个元素</span>
-<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> foo <span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 函数与数字一样可以作为对象的成员变量</span>
-<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-    name<span class="token operator">:</span> <span class="token string">"test"</span><span class="token punctuation">,</span>
-    age<span class="token operator">:</span> <span class="token number">19</span><span class="token punctuation">,</span>
-    foo
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 函数与数字一样可以在使用时直接创建出来</span>
-<span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span>
-
-<span class="token comment">// 函数与数字一样可以被传递给另一个函数</span>
-<span class="token keyword">function</span> <span class="token function">weirdAdd</span><span class="token punctuation">(</span><span class="token parameter">n<span class="token punctuation">,</span> f</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> n <span class="token operator">+</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-<span class="token function">weirdAdd</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token number">110</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 233</span>
-
-<span class="token comment">// 函数与数字一样可以被另一个函数返回</span>
-<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token comment">/*
-  高阶函数
-    以一个函数作为参数
-    返回一个函数作为结果
-*/</span></code></pre>
+          <h1 id="形式名词"><a href="#形式名词" class="headerlink" title="形式名词"></a>形式名词</h1><h2 id="◯-の"><a href="#◯-の" class="headerlink" title="◯ の"></a>◯ の</h2><ul>
+<li><strong>接续：</strong> 动「辞」 + の(は、が、を)</li>
+<li><strong>意义：</strong> 短句名词化.<br><strong>野球[やきゅう]の試合[しあい]を見[み]るのは面白[おもしろ]い。</strong><br>看棒球比赛很有趣.<br><strong>日本[にほん]の言葉[ことば]を覚[おぼ]えるのが大変[たいへん]です。</strong><br>背记日语单词很够呛.<br><strong>彼[かれ]らはコンサート(ko.n.sa-.to)が始[はじ]まるのを待[ま]っていた。</strong><br>他们在等演唱会开始.</li>
+</ul>
+<h2 id="◯-こと"><a href="#◯-こと" class="headerlink" title="◯ こと"></a>◯ こと</h2><ul>
+<li><strong>接续：</strong> 动「辞」 + こと(は、が、を)</li>
+<li><strong>意义：</strong> 短句名词化.<br><strong>旅行[りょこう]をすることは楽[たの]しいです。</strong><br>旅行很快乐.<br><strong>料理[りょうり]を作[つく]ることが好[す]きです。</strong><br>我喜欢烧饭做菜.<br><strong>私が休[やす]むことを先生[せんせい]に伝[つた]えてください。</strong><br>请把我请假的事情转告老师.</li>
+</ul>
+<h2 id="◯-とこと"><a href="#◯-とこと" class="headerlink" title="◯ とこと"></a>◯ とこと</h2><ul>
+<li><strong>接续：</strong> (1) 动「辞」 + ところだ</li>
+<li><strong>意义：</strong> 接下来的时间.<br><strong>今[いま]から母[はは]に電話[でんわ]をかけるところです。</strong><br>我现在正要给妈妈打电话.</li>
+<li><strong>接续：</strong> (2) 动「て」 + いるところだ</li>
+<li><strong>意义：</strong> 表示眼前或目前这段时间.<br><strong>大川「山下さん、お礼[れい]の手紙[てがみ]はもう出[だ]しましたか。」</strong><br>山下, 感谢信已经寄出去了吗?<br><strong>山下「いいえ、今[いま]書[か]いているところです。」</strong><br>没有, 现在正在写.</li>
+<li><strong>接续：</strong> (3) 动「て」 + ところだ</li>
+<li><strong>意义：</strong> 表示眼前或不久前的某个时间.<br><strong>A「遅[おそ]くなってすみません。」</strong><br>不好意思, 我迟到了.<br><strong>B「いいえ、私も今[いま]来[き]たところです。」</strong><br>哪里哪里, 我也刚到.</li>
+<li><strong>接续：</strong> (4) 动「て」 + いたところだ</li>
+<li><strong>意义：</strong> 表示一直持续的事刚结束的时间.<br><strong>おお、山田さん、いらっしゃい。さっきまで君[きみ]のことを話[はな]していたところですよ。</strong><br>哦, 是山田啊, 你来了. 刚才还在谈论你呢.</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/25/%E4%B8%80%E7%AD%89%E5%87%BD%E6%95%B0%E4%B8%8EApplicative%E7%BC%96%E7%A8%8B/#more" rel="contents">
+              <a class="btn" href="/2020/06/07/n4-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -376,7 +363,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/25/n5-%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E8%AF%8D/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/06/n4-%E6%8C%87%E7%A4%BA%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -389,7 +376,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/25/n5-%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E8%AF%8D/" class="post-title-link" itemprop="url">n5-部分功能词</a>
+          <a href="/2020/06/06/n4-%E6%8C%87%E7%A4%BA%E8%AF%8D/" class="post-title-link" itemprop="url">n4-指示词</a>
         </h2>
 
         <div class="post-meta-container">
@@ -400,7 +387,119 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2020-05-25 12:27:31" itemprop="dateCreated datePublished" datetime="2020-05-25T12:27:31+09:00">2020-05-25</time>
+      <time title="作成日：2020-06-06 10:09:07" itemprop="dateCreated datePublished" datetime="2020-06-06T10:09:07+09:00">2020-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>571</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>1 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="指示词"><a href="#指示词" class="headerlink" title="指示词"></a>指示词</h1><h2 id="◯-こう·そう·ああ·どう"><a href="#◯-こう·そう·ああ·どう" class="headerlink" title="◯ こう·そう·ああ·どう"></a>◯ こう·そう·ああ·どう</h2><ul>
+<li><strong>接续：</strong> (1)こう·そう·ああ·どう + だ/形容词</li>
+<li><strong>意义：</strong> 事物的样子、现象. “这样/那样/那样/怎样”.<br><strong>こう暑[あつ]くては大変[たいへん]ですね。</strong><br>这么热的天真受不了啊.</li>
+<li><strong>接续：</strong> (2)こう·そう·ああ·どう + 动词</li>
+<li><strong>意义：</strong> 表示方式、方法. “这样/那样/那样/怎样”.<br><strong>これから、どうするのかゆっくり考[かんが]えなさい。</strong><br>今后该怎么办, 你好好想想吧.</li>
+</ul>
+<h2 id="◯-こんなに·そんなに·あんなに·どんなに"><a href="#◯-こんなに·そんなに·あんなに·どんなに" class="headerlink" title="◯ こんなに·そんなに·あんなに·どんなに"></a>◯ こんなに·そんなに·あんなに·どんなに</h2><ul>
+<li><strong>接续：</strong> こんなに·そんなに·あんなに·どんなに + 形容词/动词</li>
+<li><strong>意义：</strong> 表示程度. “这么/那么/那么/怎么”.<br><strong>あんなに素晴[すば]らしい天気[てんき]は本当[ほんとう]に珍[めずら]しいです。</strong><br>那么好的天气真是不多见啦.</li>
+</ul>
+<h2 id="◯-このようだ·そのようだ·あのようだ·どのようだ"><a href="#◯-このようだ·そのようだ·あのようだ·どのようだ" class="headerlink" title="◯ このようだ·そのようだ·あのようだ·どのようだ"></a>◯ このようだ·そのようだ·あのようだ·どのようだ</h2><ul>
+<li><strong>接续：</strong> (1) こ(そ、あ、ど)のような + (形容词) + 名词</li>
+<li><strong>意义：</strong> 指同类事物中的其中之一. “这种/那种/那种/哪种”.<br><strong>ほら、私はこのような小[ちい]さいなデジカメ(de.ji.ka.me)が欲[ほ]しいのです。</strong><br>你看, 我就想要这种微型数码相机.</li>
+<li><strong>接续：</strong> (2) こ(そ、あ、ど)のように + 形容词/名词</li>
+<li><strong>意义：</strong> 表示动作、作用的状态. “这样地/那样地/那样地/怎样地”.<br><strong>毎日[まいにち]、このように働[はたら]いていても、生活[せいかつ]が楽[らく]にならない。</strong><br>即使每天像这样工作, 生活也宽裕不起来.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/05/n4-%E5%8A%A9%E5%8A%A8%E8%AF%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/05/n4-%E5%8A%A9%E5%8A%A8%E8%AF%8D/" class="post-title-link" itemprop="url">n4-助动词</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2020-06-05 10:08:33" itemprop="dateCreated datePublished" datetime="2020-06-05T10:08:33+09:00">2020-06-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -444,32 +543,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="部分功能词"><a href="#部分功能词" class="headerlink" title="部分功能词"></a>部分功能词</h1><h2 id="◯-ある"><a href="#◯-ある" class="headerlink" title="◯ ある"></a>◯ ある</h2><ul>
-<li><strong>接续：</strong> 助词 + ある</li>
+          <h1 id="助动词"><a href="#助动词" class="headerlink" title="助动词"></a>助动词</h1><h2 id="◯-ず-否定助动词"><a href="#◯-ず-否定助动词" class="headerlink" title="◯ ず(否定助动词)"></a>◯ ず(否定助动词)</h2><ul>
+<li><strong>接续：</strong> 动「未」 + ず(に)</li>
 <li><strong>意义：</strong><ul>
-<li>1.物品等的存在(反义词为「ない」). “在…”<br><strong>駅[えき]の近[ちか]くに本屋[ほんや]が<code>あります</code>。</strong><br>车站附近有书店.<br><strong>財布[さいふ]はどこにも<code>ありませんでした</code>。</strong><br>钱包哪儿也没有.</li>
-<li>2.拥有. “有…”<br><strong>鉛筆[えんぴつ]が一本[いっぽん]<code>あります</code>。</strong><br>有一支铅笔.<br><strong>旅行[りょこう]したいですが、時間[じかん]が<code>ありません</code>。</strong><br>想去旅行, 可没有时间.</li>
-<li>3.用「ありませんか」询问, 带有说话人希望得到某物品. “没有…吗”<br><strong>何[なに]か食[た]べる物[もの]が<code>ありませんか</code>。</strong><br>你这里没什么吃的东西吗?<br><strong>この辺[へん]に食料品[しょくりょうひん]を売[う]っている店[みせ]は<code>ありませんか</code>。</strong><br>这一带有没有卖食品的商店?</li>
-<li>4.举办、发生等. “有…”、”进行…”<br><strong>月曜日[げつようび]か火曜日[かようび]にテスト(te.su.to)が<code>あります</code>。</strong><br>星期一或星期二有考试.<br><strong>明日[あした]、試合[しあい]が<code>あります</code>。</strong><br>明天将举办运动会.<br><strong>この道[みち]に事故[じこ]が<code>ありました</code>。</strong><br>这条路上发生过事故.</li>
-<li>5.用「～から～がある」, 表示收到某方发出的信息. “从…来…”<br><strong>友達[ともだち]からメール(me-.ru)が<code>ありました</code>。</strong><br>朋友给我发来了电子邮件.<br><strong>父[ちち]から電話[でんわ]が<code>あって</code>、今日[きょう]は遅[おそ]く帰[かえ]ると言[い]いました。</strong><br>父亲打来电话, 说今天晚回家.</li>
-<li>6.用「あった」, 表示发现. “原来在…”<br><strong>ああ、鍵[かぎ]がこんなところに<code>ありました</code>。</strong><br>啊, 原来钥匙在这里啊.<br><strong>写真[しゃしん]はカバン(ka.ba.n)の下[した]に<code>ありました</code>。</strong><br>原来照片在包底下(压着)呢.</li>
+<li>1.没做前项就直接做后项. “没…就…”<br><strong>弟[おとうと]は今朝[けさ]ご飯[はん]を食[た]べずに学校[がっこう]へ行[い]きました。</strong><br>弟弟今天早上没吃早饭就去上学了.</li>
+<li>2.取而代之, 即用后项取代前项. “不是…而是”<br><strong>試験[しけん]を受[う]けずに、そのかわりにレポート(re.po-.to)を出[だ]しましたか。</strong><br>没有参加考试, 而是用报告代替了考试.</li>
+<li>3.原因. “因为没有…所以…”<br><strong>あの頃[ころ]は、やりたいことも仕事[しごと]も見[み]つからず、毎日[まいにち]が不安[ふあん]だった。</strong><br>那时, 由于找不到不相干的工作, 每天都惶恐不安.</li>
 </ul>
 </li>
 </ul>
-<h2 id="◯-いる"><a href="#◯-いる" class="headerlink" title="◯ いる"></a>◯ いる</h2><ul>
-<li><strong>接续：</strong> 助词 + いる</li>
-<li><strong>意义：</strong><ul>
-<li>1.表示人物或动物的存在. “在…”、”有…”<br><strong>バス(ba.su)の中[なか]に客[きゃく]が<code>います</code>。</strong><br>公交车里有乘客.<br><strong>動物園[どうぶつえん]にいろいろな動物[どうぶつ]が<code>います</code>。</strong><br>动物园里有各种动物.</li>
-<li>2.表示居住、滞留某地等. “待在…”<br><strong>おばあさんのうちに一週間[いっしゅうかん]<code>いました</code>。</strong><br>在外婆家待了一个星期.</li>
-<li>3.生死状况. “在”、”活着”<br><strong>おばあさんはまだ<code>います</code>が、おじいさんはもう<code>いません</code>。</strong><br>奶奶还活着, 但爷爷已经不在了.</li>
-<li>4.用「(人物)に(人物)がいる」, 表示拥有的兄弟姐妹. “有…”<br><strong>私には弟[おとうと]が<code>います</code>。</strong><br>我有个弟弟.<br><strong>あの人[ひと]には子供[こども]がまだ<code>いません</code>。</strong><br>那个人还没有(生)孩子.</li>
-<li>5.用「いませんか」询问, 带有说话人希望有某人存在. “没有…人吗”<br><strong>私には弟[おとうと]が<code>います</code>。</strong><br>我有个弟弟.<br><strong>お父[とう]さんが<code>いません</code>か。</strong><br>爸爸他不在家吗?<br><strong>部屋[へや]に誰[だれ]か<code>いません</code>か。</strong><br>房间里有人吗?</li>
+<h2 id="◯-たい-愿望助动词"><a href="#◯-たい-愿望助动词" class="headerlink" title="◯ たい(愿望助动词)"></a>◯ たい(愿望助动词)</h2><ul>
+<li><strong>接续：</strong> (1) 动「连」 + たい + 名词</li>
+<li><strong>意义：</strong> 第一、第二和第三人称的愿望. “想…”.<br><strong>私の買[か]いたいものはカバン(ka.ba.n)です。</strong><br>我想买的东西是皮包.<br><strong>これがあなたの買[か]いたい本[ほん]です。</strong><br>这就是你想买的书.<br><strong>彼女[かのじょ]の合[あ]いたい人[ひと]が君[きみ]です。</strong><br>她想见的人是你.</li>
+<li><strong>接续：</strong> (2) 动「连」 + たければ 动「连」 + たくなければ</li>
+<li><strong>意义：</strong> 对第一、第二和第三人称愿望的假定. “如果(不)想…”.<br><strong>行[い]きたければ、行[い]ってください。行[い]きたくなければ、行[い]かなくてもいいです。</strong><br>如果你想去就去吧. 如果不想去不去也可以.<br><strong>息子[むすこ]は働[はたら]きたければ、やらせてもいいでしょう。</strong><br>如果儿子想参加工作的话, 让他干就行了吧.</li>
+<li><strong>接续：</strong> (3) 动「连」 + たいと思っている</li>
+<li><strong>意义：</strong> 第一、第二和第三人称的愿望.<br><strong>私は、自分[じぶん]で会社[かいしゃ]を作[つく]りたいと思[おも]っています。</strong><br>我想自己办家公司.<br><strong>その時[とき]、父[ちち]は国語[こくご]の先生[せんせい]になりたいと思[おも]っていました。</strong><br>当时我父亲想当一名语文老师.</li>
+<li><strong>接续：</strong> (4) 动「连」 + たいらしい/ようだ/そうだ/のだ</li>
+<li><strong>意义：</strong> 传递第三人称的愿望.<br><strong>その時[とき]、妹[いもうと]も留学[りゅうがく]に行[い]きたかったらしい。</strong><br>当时, 我妹妹似乎也想去留学.<br><strong>山田さんも留学[りゅうがく]したいようです。</strong><br>好像山田也想留学.</li>
 </ul>
-</li>
+<h2 id="◯-たがる-愿望助动词"><a href="#◯-たがる-愿望助动词" class="headerlink" title="◯ たがる(愿望助动词)"></a>◯ たがる(愿望助动词)</h2><ul>
+<li><strong>接续：</strong> (1) 动「连」 + たがっている</li>
+<li><strong>意义：</strong> 第三人称目前的愿望. “想…”.が<br><strong>そのアパート(a.pa-.to)に住[す]みたがっている学生[がくせい]が多[おお]い。</strong><br>想住这座公寓的学生有很多.<br><strong>A「ここで少[すこ]し休[やす]みますか。」</strong><br>在这里休息一会儿吗?<br><strong>B「はい。子供[こども]たちも休[やす]みたがっています。」</strong><br>好, 孩子们也想歇会儿.</li>
+<li><strong>接续：</strong> (2) 动「连」 + たがる</li>
+<li><strong>意义：</strong> 第三人称一贯的愿望. “平时想…”、”动辄就想…”.<br><strong>うちの子供[こども]は怖[こわ]い話[はなし]を聞[き]きたがる。</strong><br>我家孩子总想听恐怖故事.<br><strong>A「うちの息子[むすこ]は肉[にく]より野菜[やさい]のほうが好[す]きなんですよ。」</strong><br>我儿子比起肉食平时更喜欢吃蔬菜.<br><strong>B「いいですね。うちの子供[こども]は野菜[やさい]を食[た]べたがらなくて困[こま]っているんですよ。」</strong><br>那很好啊, 我家孩子不愿吃蔬菜, 所以很伤脑筋.</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/25/n5-%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E8%AF%8D/#more" rel="contents">
+              <a class="btn" href="/2020/06/05/n4-%E5%8A%A9%E5%8A%A8%E8%AF%8D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -502,7 +603,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/25/JavaScript-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/04/n4-%E5%8A%A9%E8%AF%8D-%E8%AF%AD%E6%B0%94%E5%8A%A9%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -515,7 +616,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/25/JavaScript-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">JavaScript-函数式编程</a>
+          <a href="/2020/06/04/n4-%E5%8A%A9%E8%AF%8D-%E8%AF%AD%E6%B0%94%E5%8A%A9%E8%AF%8D/" class="post-title-link" itemprop="url">n4-助词-语气助词</a>
         </h2>
 
         <div class="post-meta-container">
@@ -526,130 +627,7 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2020-05-25 10:37:18" itemprop="dateCreated datePublished" datetime="2020-05-25T10:37:18+09:00">2020-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>5.6k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>9 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="JavaScript-函数式编程"><a href="#JavaScript-函数式编程" class="headerlink" title="JavaScript 函数式编程"></a>JavaScript 函数式编程</h1><h2 id="JavaScript-案例"><a href="#JavaScript-案例" class="headerlink" title="JavaScript 案例"></a>JavaScript 案例</h2><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">&#123;</span>_<span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'underscope'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">splat</span><span class="token punctuation">(</span><span class="token parameter">fun</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">array</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">fun</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> array<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">let</span> addArrayElements <span class="token operator">=</span> <span class="token function">splat</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token operator">=></span> x <span class="token operator">+</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token function">addArrayElements</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span>
-
-<span class="token keyword">function</span> <span class="token function">unsplat</span><span class="token punctuation">(</span><span class="token parameter">fun</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token function">fun</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> _<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span>arguments<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// return fun.call(null, [...arguments]);</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">let</span> joinElements <span class="token operator">=</span> <span class="token function">unsplat</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">array</span><span class="token punctuation">)</span> <span class="token operator">=></span> array<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token function">joinElements</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// '1 2'</span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/25/JavaScript-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/25/n5-%E8%A1%A5%E5%8A%A9%E5%8A%A8%E8%AF%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/25/n5-%E8%A1%A5%E5%8A%A9%E5%8A%A8%E8%AF%8D/" class="post-title-link" itemprop="url">n5-补助动词</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2020-05-25 06:00:12" itemprop="dateCreated datePublished" datetime="2020-05-25T06:00:12+09:00">2020-05-25</time>
+      <time title="作成日：2020-06-04 10:07:51" itemprop="dateCreated datePublished" datetime="2020-06-04T10:07:51+09:00">2020-06-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -675,7 +653,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>1.4k</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
@@ -693,38 +671,152 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="补助动词"><a href="#补助动词" class="headerlink" title="补助动词"></a>补助动词</h1><h2 id="◯-～てある"><a href="#◯-～てある" class="headerlink" title="◯ ～てある"></a>◯ ～てある</h2><ul>
-<li><strong>接续：</strong> 动「て」 + ある</li>
+          <h1 id="助词"><a href="#助词" class="headerlink" title="助词"></a>助词</h1><h2 id="语气助词"><a href="#语气助词" class="headerlink" title="语气助词"></a>语气助词</h2><h3 id="◯-か"><a href="#◯-か" class="headerlink" title="◯ か"></a>◯ か</h3><ul>
+<li><strong>接续：</strong> 名词/ナ「词干」 + か イ「辞」/动「辞」 + か 助动词「た」 + か</li>
+<li><strong>意义：</strong> 普通体疑问句, 和礼貌体的「～ですか/ますか」同义.<ul>
+<li>1.读升调, 表示疑问、质问等<br><strong>A「君[きみ]のけが、大丈夫[だいじょうぶ]か。」</strong><br>你的伤要紧吗?<br><strong>B「軽[かる]いけがですから、大丈夫[だいじょうぶ]です。」</strong><br>小伤, 不碍事.</li>
+<li>2.读升调, 表示疑问并选择. “…呢, 还是…呢”<br><strong>お昼[ひる]はご飯[はん]にするか、うどんにするか。</strong><br>午饭你是吃米饭还是吃面条?</li>
+<li>3.读升调, 表示确认. “你说的是…吗”<br><strong>A「赤[あか]い紙[かみ]、ないか。」</strong><br>有没有红颜色的纸张?<br><strong>B「赤[あか]い紙[かみ]か、あるよ。」</strong><br>红颜色的纸吗? 有啊.</li>
+<li>4.读升调, 以反问的形式表示强烈的否定. “难道…吗?”<br><strong>バス(ba.su)も通[かよ]っていないところ、便利[べんり]か。便利[べんり]なはずがないよ。</strong><br>连公交车都没开通的地方, 交通会便利吗? 不可能便利.</li>
+<li>5.读降调, 表示惊讶或感叹<br><strong>A「おい、山田君[くん]。」</strong><br>喂, 山田.<br><strong>なんだ、君[きみ]か。久[ひさ]しぶりだね。</strong><br>哎呀, 是你呀. 好久不见了.</li>
+<li>6.催促自己<br><strong>ああ、ちょっと疲[つか]れた。さあ、寝[ね]るか。</strong><br>哎呀, 有点累啊. 得了, 还是睡觉吧.</li>
+</ul>
+</li>
+</ul>
+<h3 id="◯-な"><a href="#◯-な" class="headerlink" title="◯ な"></a>◯ な</h3><ul>
+<li><strong>接续：</strong> 动「辞」 + な</li>
+<li><strong>意义：</strong> 男性用语, 表示禁止. “禁止…”、”不允许”.<br><strong>ここに車[くるま]を止[と]めるな。邪魔[じゃま]だ。</strong><br>别把车停在这里. 碍手碍脚的.<br><strong>そんな汚[きたな]い服[ふく]、着[き]るなよ。</strong><br>那么脏的衣服, 别穿了吧.</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/04/n4-%E5%8A%A9%E8%AF%8D-%E8%AF%AD%E6%B0%94%E5%8A%A9%E8%AF%8D/#more" rel="contents">
+                続きを読む &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/03/n4-%E5%8A%A9%E8%AF%8D-%E5%89%AF%E5%8A%A9%E8%AF%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/03/n4-%E5%8A%A9%E8%AF%8D-%E5%89%AF%E5%8A%A9%E8%AF%8D/" class="post-title-link" itemprop="url">n4-助词-副助词</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2020-06-03 08:46:18" itemprop="dateCreated datePublished" datetime="2020-06-03T08:46:18+09:00">2020-06-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>6 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="助词"><a href="#助词" class="headerlink" title="助词"></a>助词</h1><h2 id="副助词"><a href="#副助词" class="headerlink" title="副助词"></a>副助词</h2><h3 id="◯-は"><a href="#◯-は" class="headerlink" title="◯ は"></a>◯ は</h3><ul>
+<li><strong>接续：</strong> (1) 数量词 + は</li>
+<li><strong>意义：</strong> 数量的最低限度. “起码…”、”至少…”.<br><strong>ここから駅[えき]まで車[くるま]でも１５分[ふん]はかかります。</strong><br>从这里到车站, 即使开车至少也需要 15 分钟.<br><strong>缶詰[かんづめ]のビール(bi-.ru)だったら、10 本[ぽん]は大丈夫[だいじょうぶ]です。</strong><br>要是听装啤酒的话, 我起码喝 10 听没问题.</li>
+<li><strong>接续：</strong> (2) 时间名词 + には/にも</li>
+<li><strong>意义：</strong> 「には」表示 “最迟在…”、”最晚在…”; 「にも」则相反, 表示 “最早在…”、”最快在…”.<br><strong>今日[きょう]は 10 時[じ]には帰[かえ]ります。</strong><br>今天最迟在 10 点回家.<br><strong>今日[きょう]は 10 時[じ]にも帰[かえ]ります。</strong><br>今天最早也得在 10 点回家.<br><strong>レポート(re.po-.to)は明日[あした]には終[お]わります。</strong><br>报告最晚明天写完.<br><strong>レポート(re.po-.to)は明日[あした]にも終[お]わります。</strong><br>报告最快要到明天写完.</li>
+</ul>
+<h3 id="◯-も"><a href="#◯-も" class="headerlink" title="◯ も"></a>◯ も</h3><ul>
+<li><strong>接续：</strong> (1) 数量词 + も + 动词 数量词 + もの + 名词 何(なん) + 量词 + も</li>
 <li><strong>意义：</strong><ul>
-<li>1.动作结束后物品等的留存. “…着”<br><strong>テーブル(te-.bu.ru)の上[うえ]に花瓶[かびん]が置[お]い<code>てある</code>。</strong><br>桌子上放着花瓶.<br><strong>冷蔵庫[れいぞうこ]にビール(bi-.ru)が入[い]れ<code>てあります</code>。</strong><br>冰箱里放油啤酒.</li>
-<li>2.动作结束后其结果的存续状态. “…着”<br><strong>部屋[へや]の電気[でんき]が付[つ]け<code>てあります</code>。</strong><br>房间的灯开着.<br><strong>黒板[こくばん]に字[じ]が書[か]い<code>てあります</code>。</strong><br>黑板上写着字.</li>
+<li>1.后续肯定句, 表示数量多的超出预料. “竟然多达…”<br><strong>弟[おとうと]がリンゴ(ri.n.go)を五[いつ]つも食[た]べました。</strong><br>弟弟竟然一口气吃了 5 个苹果.<br><strong>この家[いえ]には、１億[おく]円[えん]ものお金[かね]がかかった。</strong><br>建这栋房子, 竟然花了 1 亿日元的钱.<br><strong>彼[かれ]は一年[いちねん]に何回[なんかい]も日本[におん]へ行[い]きます。</strong><br>他一年要去日本好多次.</li>
+<li>2.后接否定句, 表示数量少的超出预料. “竟然还不到”<br><strong>A「向[む]こうまで遠[とお]いですか。」</strong><br>到那里远吗?<br><strong>B「いいえ、車[くるま]から 5 分[ふん]もかかりません。」</strong><br>不远. 开车不到 5 分钟.<br><strong>彼[かれ]が来[く]るまで、何分[なんぷん]も待[ま]たなかった。</strong><br>我等他过来, 也没等几分钟.</li>
 </ul>
 </li>
+<li><strong>接续：</strong> (2) 名词 + も</li>
+<li><strong>意义：</strong> 提示主语「が」和宾语「を」, 用于类推. “就连…也…”.<br><strong>のどが痛[いた]くて、水[みず]も通[とお]らない。</strong><br>喉咙痛, 疼得连水都喝不下.<br><strong>漢字[かんじ]はまだできません。ひらがなも上手[じょうず]に書[か]くことができません。</strong><br>我还不会汉字. 连平假名还写不好.</li>
+<li><strong>接续：</strong> (3) 名词(+格助词) + も</li>
+<li><strong>意义：</strong> 提示主题「は」, 用于举出极端事例. “甚至连…也…”.<br><strong>子供[こども]も持[も]てる軽[かる]い荷物[にもつ]しかない。</strong><br>只有一些连孩子也拿得动的行李.<br><strong>その問題[もんだい]は難[むずか]しくて、先生[せんせい]もできなかったそうです。</strong><br>那道题目太难了, 听说甚至连老师也没做出来.</li>
 </ul>
-<h2 id="◯-～ている"><a href="#◯-～ている" class="headerlink" title="◯ ～ている"></a>◯ ～ている</h2><ul>
-<li><p><strong>接续：</strong> 动「て」 + いる</p>
-</li>
-<li><p><strong>意义：</strong></p>
-<ul>
-<li><p>1.眼前正在持续的动作<br><strong>今[いま]、テレビ(te.re.bi)を見[み]<code>ています</code>。</strong><br>现在我正在看电视.<br><strong>今[いま]、猫[ねこ]は魚[さかな]を食[た]べ<code>ています</code>。</strong><br>现在猫咪正在吃鱼.<br><strong>電車[でんしゃ]が走[はし]っ<code>ています</code>。</strong><br>电车正在行驶中.</p>
-</li>
-<li><p>2.经常性的动作、行为<br><strong>毎晩[まいばん]、自分[じぶん]で料理[りょうり]し<code>ています</code>。</strong><br>每晚自己做饭.<br><strong>週[しゅう]に二回[にかい]テニス(te.ni.su)をし<code>ています</code>。</strong><br>每周打两次网球.</p>
-<p><strong>说明：</strong><br>动作现在时也能表达经常性的动作、行为.<br><strong>毎日[まいにち]、会社[かいしゃ]へ行[い]きます。</strong><br>我每天上班.<br><strong>年[ねん]に一度[いちど]旅行[りょこう]します。</strong><br>每年旅行一次.</p>
-</li>
-<li><p>3.人物动作结束后的状态保留(状态保留用法之一)<br><strong>お父[とう]さんはもう帰[かえ]っ<code>ています</code>。</strong><br>爸爸已经回到家了.<br><strong>鈴木[すずき]さんは結婚[けっこん]し<code>ています</code>。</strong><br>铃木已经结婚了.</p>
-</li>
-<li><p>4.自然现象等事物的状态保留(状态保留用法之一)<br><strong>今[いま]、空[そら]が晴[は]れ<code>ています</code>。</strong><br>现在是晴空万里.<br><strong>桜[さくら]の花[はな]が咲[さ]い<code>ています</code>。</strong><br>樱花开放.</p>
-</li>
-<li><p>5.穿戴、打扮等的样子(状态保留用法之一)<br><strong>今日[きょう]、クミ(ku.mi)さんは赤[あか]いスカート(su.ka-.to)を着[き]<code>ています</code>。</strong><br>今天, 久美小姐穿了一条红裙子.<br><strong>先生[せんせい]はネクタイ(ne.ku.ta.i)をしめ<code>ています</code>。</strong><br>老师系着领带.</p>
-</li>
-<li><p>6.手拿、肩背等的样子(状态保留用法之一)<br><strong>クミ(ku.mi)さんは手[て]に新聞[しんぶん]を持[も]っ<code>ています</code>。</strong><br>久美手上拿着报纸.</p>
-</li>
-</ul>
-</li>
+<h3 id="◯-か"><a href="#◯-か" class="headerlink" title="◯ か"></a>◯ か</h3><ul>
+<li><strong>接续：</strong> (1) 疑问词 + 量词 + か</li>
+<li><strong>意义：</strong> 不确定但并不多的数量. “若干…”.<br><strong>今日[きょう]は何人[なんにん]かと会[あ]いました。</strong><br>今天约见了几个人.<br><strong>金[かね]はいくらか残[のこ]っています。</strong><br>手头还有若干现金.</li>
+<li><strong>接续：</strong> (2) 数量词 + か + 数量词</li>
+<li><strong>意义：</strong> 不确定的大概数量.<br><strong>彼女[かのじょ]とは、ここ 2 年[ねん]か 3 年[ねん]あっていません。</strong><br>跟她已经有 2、3 年没见面了.<br><strong>車[くるま]は 2 台[だい]か 3 台[だい]用意[ようい]しておいてください。</strong><br>请准备好 2、3 辆车.</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/25/n5-%E8%A1%A5%E5%8A%A9%E5%8A%A8%E8%AF%8D/#more" rel="contents">
+              <a class="btn" href="/2020/06/03/n4-%E5%8A%A9%E8%AF%8D-%E5%89%AF%E5%8A%A9%E8%AF%8D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -757,7 +849,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/24/n5-%E6%8E%A5%E5%B0%BE%E8%AF%8D/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/02/n4-%E5%8A%A9%E8%AF%8D-%E6%8E%A5%E7%BB%AD%E5%8A%A9%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -770,7 +862,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/24/n5-%E6%8E%A5%E5%B0%BE%E8%AF%8D/" class="post-title-link" itemprop="url">n5-接尾词</a>
+          <a href="/2020/06/02/n4-%E5%8A%A9%E8%AF%8D-%E6%8E%A5%E7%BB%AD%E5%8A%A9%E8%AF%8D/" class="post-title-link" itemprop="url">n4-助词-接续助词</a>
         </h2>
 
         <div class="post-meta-container">
@@ -781,7 +873,7 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2020-05-24 12:00:42" itemprop="dateCreated datePublished" datetime="2020-05-24T12:00:42+09:00">2020-05-24</time>
+      <time title="作成日：2020-06-02 08:45:57" itemprop="dateCreated datePublished" datetime="2020-06-02T08:45:57+09:00">2020-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -807,14 +899,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>2k</span>
+      <span>3.8k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>3 分</span>
+      <span>6 分</span>
     </span>
 </div>
 
@@ -825,29 +917,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="接尾词"><a href="#接尾词" class="headerlink" title="接尾词"></a>接尾词</h1><h2 id="◯-～たち"><a href="#◯-～たち" class="headerlink" title="◯ ～たち"></a>◯ ～たち</h2><ul>
-<li><strong>接续：</strong> 人称代词 + たち</li>
-<li><strong>意义：</strong> 人物的复数. “…们”.<br><strong>子供[こども]<code>たち</code>は庭[にわ]で遊[あそ]んでいます。</strong><br>孩子们正在庭院里玩耍.</li>
+          <h1 id="助词"><a href="#助词" class="headerlink" title="助词"></a>助词</h1><h2 id="接续助词"><a href="#接续助词" class="headerlink" title="接续助词"></a>接续助词</h2><h3 id="◯-し"><a href="#◯-し" class="headerlink" title="◯ し"></a>◯ し</h3><ul>
+<li><strong>接续：</strong> (1) 句子 + し、(それに)</li>
+<li><strong>意义：</strong><ul>
+<li>1.添加. “既…又…”、”而且还…”<br><strong>あの店[みせ]は安[やす]い<code>し</code>、店員[てんいん]も親切[しんせつ]です。</strong><br>那家店不仅东西价格便宜, 而且店员也和蔼可亲.<br><strong>昨日[きのう]は風[かぜ]も強[つよ]かった<code>し</code>、雨[あめ]もたくっさん降[ふ]りました。</strong><br>昨天不仅风大, 而且还下了大雨.</li>
+<li>2.列举一到两个原因、并暗示还有其他. “又是(因为)…”<br><strong>子供[こども]は熱[ねつ]を出[だ]す<code>し</code>、冷蔵庫[れいぞうこ]は壊[こわ]れる<code>し</code>、先週[せんしゅう]はひどい目[め]にあった。</strong><br>孩子发烧了, 家里的冰箱又坏了, 上周可苦了我.<br><strong>このアパート(a.pa-.to)は便利[べんり]だ<code>し</code>、新[あたら]しいので、部屋[へや]代[だい]が高[たか]いです。</strong><br>这栋公寓楼周围的交通又便利, 而且有时新建的, 所以房租很贵.</li>
 </ul>
-<h2 id="◯-～がた"><a href="#◯-～がた" class="headerlink" title="◯ ～がた"></a>◯ ～がた</h2><ul>
-<li><strong>接续：</strong> 人称代词 + がた</li>
-<li><strong>意义：</strong> 尊敬语, 人物的复数. “…们”.<br><strong>先生[せんせい]<code>がた</code>もパーティー(pa-.thi-)にいらっしゃいます。</strong><br>老师们也要来参加派对.</li>
+</li>
 </ul>
-<h2 id="◯-～さん"><a href="#◯-～さん" class="headerlink" title="◯ ～さん"></a>◯ ～さん</h2><ul>
-<li><strong>接续：</strong> 人称代词 + さん　(外部人员)职称 + さん</li>
-<li><strong>意义：</strong> 表示敬称、亲昵等语气.<br><strong>すみません、山田[やまだ]<code>さん</code>はいますか。</strong><br>请问, 山田在吗?<br><strong>課長[かちょう]<code>さん</code>、こちらへどうぞ。</strong><br>科长, 请到这边来.</li>
+<h3 id="◯-たり"><a href="#◯-たり" class="headerlink" title="◯ たり"></a>◯ たり</h3><ul>
+<li><strong>接续：</strong> (1) 动「た」 + り(など)する</li>
+<li><strong>意义：</strong> 举一例暗示其他. “…什么的”、”…之类的”.<br><strong>暇[ひま]なときは、本[ほん]を読[よ]ん<code>だりします</code>。</strong><br>有空的时候我就看看书什么的.<br><strong>人[ひと]に迷惑[めいわく]をかけ<code>たりし</code>ないでください。</strong><br>不要给人添麻烦什么的.</li>
+<li><strong>接续：</strong> (2) 动「た」 + り、动「未」 + なかったりする</li>
+<li><strong>意义：</strong> 动作、状态的反复. “有时…”、”有时不…”.<br><strong>薬[くすり]を飲[の]ん<code>だり</code>飲[の]まなかっ<code>たりする</code>。</strong><br>药吃吃停停.</li>
+<li><strong>接续：</strong> (3) 名「た」 + り～たりだ(する) ナ「た」 + り～たりだ(する) イ「た」 + り～たりだ(する)</li>
+<li><strong>意义：</strong> 动作、状态的反复. “一会儿…一会儿…”、”有时候…有时候…”.<br><strong>通勤[つうきん]は、電車[でんしゃ]だっ<code>たり</code>車[くるま]だっ<code>たりです</code>。</strong><br>有时候乘电车上班, 有时候开车上班.<br><strong>日本語[にほんご]は上手[じょうず]だっ<code>たり</code>下手[へた]だっ<code>たりです</code>。</strong><br>日语能力一会儿进步, 一会儿退步.<br><strong>飛行機[ひこうき]の切符[きっぷ]は高[たか]かっ<code>たり</code>安[やす]かっ<code>たりです</code>。</strong><br>机票价格有涨有跌.</li>
 </ul>
-<h2 id="◯-～様"><a href="#◯-～様" class="headerlink" title="◯ ～様"></a>◯ ～様</h2><ul>
-<li><strong>接续：</strong> (1) 人称代词 + 様[さま]</li>
-<li><strong>意义：</strong> 表示敬称、亲昵等语气.<br><strong>街[まち]で、社長[しゃちょう]の奥[おく]<code>様</code>に会[あ]いました。</strong><br>在街上, 我遇到了社长的夫人.<br><strong>皆[みな]<code>様</code>、こちらへどうぞ。</strong><br>诸位, 请到这边来.</li>
-<li><strong>接续：</strong> (2) 人名、公司名等 + 様[さま]</li>
-<li><strong>意义：</strong> 表示敬意、人物对象多为信封、电子邮件、邮包的收件人.<br><strong>封筒[ふうとう]に「東京[とうきょう]電気[でんき]会社[かいしゃ]<code>様</code>」と書[か]いてあります。</strong><br>信封上写着”东京电器公司”.</li>
-<li><strong>接续：</strong> (3) 人数 + 様[さま]</li>
-<li><strong>意义：</strong> 表示敬意, 多为服务行业专业语.<br><em>(レストランで)</em><br><strong>店員[てんいん]「いらっしゃいませ。お二人[ふたり]<code>様</code>ですか。」</strong><br>欢迎光临, 两位吗?<br><strong>客[きゃく]「はい。」</strong><br>是的.</li>
+<h3 id="◯-ば"><a href="#◯-ば" class="headerlink" title="◯ ば"></a>◯ ば</h3><ul>
+<li><strong>接续：</strong> (1) イ「ば」/动「ば」</li>
+<li><strong>意义：</strong> 假定条件. “如果…”.<br><strong>毎日[まいにち]、練習[れんしゅう]をすれ<code>ば</code>、上手[じょうず]になりますよ。</strong><br>如果每天练习肯定会有长进.<br><strong>天気[てんき]が良[よ]けれ<code>ば</code>出[で]かけます。よくなけれ<code>ば</code>出[で]かけません。</strong><br>如果天气好就出门, 如果不好就不出门.</li>
+<li><strong>接续：</strong> (2) イ「ば」</li>
+<li><strong>意义：</strong> 接在「よろしい」等少量形容词后面, 表示有礼貌的询问对方的意图或时间上是否方便, 多用于开场白.<br><strong>よろしけれ<code>ば</code>、そのことは私がいたしましょうか。</strong><br>如果行的话, 那件事情我来做吧.<br><strong>よろしけれ<code>ば</code>、明日[あした]ここに来[き]ていただけませんか。</strong><br>如果您方便的话, 请明天来一下吧.</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/24/n5-%E6%8E%A5%E5%B0%BE%E8%AF%8D/#more" rel="contents">
+              <a class="btn" href="/2020/06/02/n4-%E5%8A%A9%E8%AF%8D-%E6%8E%A5%E7%BB%AD%E5%8A%A9%E8%AF%8D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -880,7 +974,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/24/n5-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/06/01/n4-%E5%8A%A9%E8%AF%8D-%E6%A0%BC%E5%8A%A9%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -893,7 +987,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/24/n5-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/" class="post-title-link" itemprop="url">n5-形式名词</a>
+          <a href="/2020/06/01/n4-%E5%8A%A9%E8%AF%8D-%E6%A0%BC%E5%8A%A9%E8%AF%8D/" class="post-title-link" itemprop="url">n4-助词-格助词</a>
         </h2>
 
         <div class="post-meta-container">
@@ -904,7 +998,7 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2020-05-24 06:59:01" itemprop="dateCreated datePublished" datetime="2020-05-24T06:59:01+09:00">2020-05-24</time>
+      <time title="作成日：2020-06-01 20:57:13" itemprop="dateCreated datePublished" datetime="2020-06-01T20:57:13+09:00">2020-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -930,14 +1024,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>986</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>2 分</span>
+      <span>5 分</span>
     </span>
 </div>
 
@@ -948,152 +1042,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="形式名词"><a href="#形式名词" class="headerlink" title="形式名词"></a>形式名词</h1><h2 id="◯-の"><a href="#◯-の" class="headerlink" title="◯ の"></a>◯ の</h2><ul>
-<li><strong>接续：</strong> 名/ナ「な」 + の　イ「辞」/动[辞] + の　助动词「た」 + の</li>
-<li><strong>意义：</strong> 名词的代用(代替前面已经出现过的物品或事物).<br><strong>この新聞[しんぶん]は昨日[きのう]<code>の</code>です。</strong><br>这份报纸是昨天的.<br><strong>スカート(su.ka-.to)は赤[あか]い<code>の</code>を買[か]いました。</strong><br>裙子我买了红色的.</li>
+          <h1 id="助词"><a href="#助词" class="headerlink" title="助词"></a>助词</h1><h2 id="格助词"><a href="#格助词" class="headerlink" title="格助词"></a>格助词</h2><h3 id="◯-が"><a href="#◯-が" class="headerlink" title="◯ が"></a>◯ が</h3><ul>
+<li><strong>接续：</strong> 名 + が</li>
+<li><strong>意义：</strong> 回答问话人所关心的信息(人物或事物). “这就是…”、”那就是…”.<br><strong>A「山田さんはどなたですか。」</strong><br>山田小姐是哪位?<br><strong>B「あの赤[あか]い服[ふく]を着[き]た人[ひと]<code>が</code>山田さんです。」</strong><br>那个穿着红衣服的人就是山田小姐.<br><strong>A「山田さん、あなたの傘[かさ]はどれですか。」</strong><br>山田, 你的雨伞是哪吧?<br><strong>B「これ<code>が</code>私のです。」</strong><br>这把(雨伞是我的).</li>
 </ul>
-<h2 id="◯-こと"><a href="#◯-こと" class="headerlink" title="◯ こと"></a>◯ こと</h2><ul>
-<li><strong>接续：</strong> 名「の」/ナ「な」 + こと　イ「辞」/动「辞」 + こと　助动词「た」 + こと</li>
-<li><strong>意义：</strong> 名词的代用(代替前面已经出现过的事情).<br><strong>好[す]きな仕事[しごと]はどんな<code>こと</code>ですか</strong><br>你喜欢的工作是什么?<br><strong>先生[せんせい]の話[はなし]は昨日[きのう]話[はな]した<code>こと</code>と同[おな]じです。</strong><br>(今天)老师说的话题和昨天说过的内容相同.</li>
+<h3 id="◯-から"><a href="#◯-から" class="headerlink" title="◯ から"></a>◯ から</h3><ul>
+<li><strong>接续：</strong> 名 + から</li>
+<li><strong>意义：</strong><ul>
+<li>1.从一定的范围里攫取、选择一部分. “从…”<br><strong>毎月[まいげつ]、給料[きゅりょう]<code>から</code>少[すこ]しずつ銀行[ぎんこう]に入[い]れています。</strong><br>每月从工资中拿出一小部分存银行.<br><strong>正[ただ]しい答[こた]えは次[つぎ]の四[よっ]つ<code>から</code>一[ひと]つ選[えら]びなさい。</strong><br>正确答案从下面的四个选项中选择一个.</li>
+<li>2.被动句中的施动者. “得到(某人的…)”、”受到(某人的…)”<br><strong>学生[がくせい]たち<code>から</code>尊敬[そんけい]されています。</strong><br>收到学生们的尊敬.<br><strong>校長[こうちょう]先生[せんせい]<code>から</code>、卒業生[そつぎょうせい]たちに卒業証書[そつぎょうしょうしょ]が渡[わた]されました。</strong><br>由校长给学生们颁发毕业证书.</li>
+<li>3.被动句中物品等流出的场所. “从…”<br><strong>国立[こくり]研究所[けんきゅうじょ]<code>から</code>、立派[りっぱ]な人材[じんざい]が会社[かいしゃ]に入[い]れられました。</strong><br>优秀人才被企业从国立研究所给挖走了.<br><strong>美術館[びじゅつかん]<code>から</code>、有名[ゆうめ]な絵[え]が泥棒[どろぼう]に盗[ぬす]まれました。</strong><br>名画被盗贼从美术馆给盗走了.</li>
+<li>4.授受句中物品、信息、服务等的提供方. “从…”<br><strong>A 社[しゃ]<code>から</code>カタログ(ka.ta.ro.gu)を送[おく]っていただきました。</strong><br>从 A 社得到了产品目录.<br><strong>友達[ともだち]<code>から</code>いろいろ助[たす]けてもらいました。</strong><br>从朋友那儿得到了很多帮助.</li>
+<li>5.原材料. “从…”、”由…”<br><strong>このお酒[さけ]は米[こめ]<code>から</code>作[つく]ります。</strong><br>这酒是用大米酿成的.<br><strong>この料理[りょうり]は豆腐[とうふ]<code>から</code>作[つく]ります。</strong><br>这道菜是用豆腐做的.</li>
 </ul>
-<h2 id="◯-もの"><a href="#◯-もの" class="headerlink" title="◯ もの"></a>◯ もの</h2><ul>
-<li><strong>接续：</strong> 名「の」/ナ「な」 + もの　イ「辞」/动「辞」 + もの　助动词「た」 + もの</li>
-<li><strong>意义：</strong> 名词的代用(代替前面已经出现过的物品).<br><strong>この傘[かさ]も好[す]きですが、もっと大[おお]きい<code>もの</code>がありませんか。</strong><br>这把雨伞我也不喜欢, 不过有没有再大点尺寸的?<br><strong>このシャツ(sha.tu)は先週[せんしゅう]買[か]った<code>もの</code>と違[ちが]いますよ。</strong><br>这件衬衫和上周买的可不一样呀.</li>
+</li>
 </ul>
-<h2 id="◯-ところ"><a href="#◯-ところ" class="headerlink" title="◯ ところ"></a>◯ ところ</h2><ul>
-<li><strong>接续：</strong> 名「の」/ナ「な」 + ところ　イ「辞」/动「辞」 + ところ　助动词「た」 + ところ</li>
-<li><strong>意义：</strong> 名词的代用(代替前面已经出现过的场所).<br><strong>私が住[す]んでいる町[まち]は静[しず]かな<code>ところ</code>です。</strong><br>我居住的镇子是一个安静的地方.<br><strong>駅[えき]の前[まえ]はとても広[ひろ]い<code>ところ</code>です。</strong>　<br>车站的前面(车站广场)是一个很宽敞的地方.</li>
+<h3 id="◯-で"><a href="#◯-で" class="headerlink" title="◯ で"></a>◯ で</h3><ul>
+<li><strong>接续：</strong> 名 + で/では/でも</li>
+<li><strong>意义：</strong><ul>
+<li>1.思维、情感等活动的抽象场所. “在…”<br><strong>心[こころ]の中[なか]<code>で</code>相手[あいて]を嫌[いや]がっている。</strong><br>在心中讨厌着对方.<br><strong>頭[あたま]の中[なか]<code>で</code>こう考[かんが]えているのだ。</strong><br>我在脑海里是这样想的.</li>
+<li>2.判断、评价的依据、基准等. “根据…”、”按照…”<br><strong>うちでは、社員[しゃいん]の成績[せいせき]<code>で</code>、給料[きゅうりょう]を決[き]める。</strong><br>在本公司, 按照职工的成绩决定其工资.<br><strong>時間[じかん]<code>で</code>アルバイト(a.ru.ba.i.to)の給料[きゅうりょう]を払[はら]う。</strong><br>按劳动时间支付工资.</li>
+<li>3.用「～では～そうだ/らしい」, 表示信息、传闻的依据<br><strong>おじいさんの電話[でんわ]<code>では</code>、おばあさんは元気[げんき]ではないそうだ。</strong><br>据爷爷在电话里说, 奶奶的身体不大好.<br><strong>天気予報[てんきよほう]<code>では</code>、明日[あす]は雨[あめ]が降[ふ]るらしい。</strong><br>据天气预报说, 明天下雨.</li>
+<li>4.表示动作主体以怎样的状态做动作<br><strong>濡[ぬ]れた手[て]<code>で</code>スイッチ(su.i.cchi)に触[さわ]ってはいけません。</strong><br>不要用湿漉漉的收去碰电源开关.<br><strong>軽[かる]い服装[ふくそう]<code>で</code>山[やま]へ行[い]きます。</strong><br>一身轻装上山.</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/24/n5-%E5%BD%A2%E5%BC%8F%E5%90%8D%E8%AF%8D/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2020/05/23/n5-%E7%96%91%E9%97%AE%E8%AF%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/23/n5-%E7%96%91%E9%97%AE%E8%AF%8D/" class="post-title-link" itemprop="url">n5-疑问词</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2020-05-23 12:04:04" itemprop="dateCreated datePublished" datetime="2020-05-23T12:04:04+09:00">2020-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>2.2k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>4 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="疑问词"><a href="#疑问词" class="headerlink" title="疑问词"></a>疑问词</h1><h2 id="◯-誰"><a href="#◯-誰" class="headerlink" title="◯ 誰"></a>◯ 誰</h2><ul>
-<li><strong>接续：</strong> 誰 + 助词</li>
-<li><strong>意义：</strong> 表示不定的人物. “谁”.<br><strong>今日[きょう]は友達[ともだち]は<code>誰[だれ]</code>も来[き]ませんでした。</strong><br>今天我朋友一个也没来.</li>
-</ul>
-<h2 id="◯-どなた"><a href="#◯-どなた" class="headerlink" title="◯ どなた"></a>◯ どなた</h2><ul>
-<li><strong>接续：</strong> どなた + 助词</li>
-<li><strong>意义：</strong> 尊敬语, 表示不定的人物. “哪位”.<br><strong>さっき、<code>どなた</code>が来[き]ましたか。</strong><br>刚才谁来过?</li>
-</ul>
-<h2 id="◯-何-なに"><a href="#◯-何-なに" class="headerlink" title="◯ 何(なに)"></a>◯ 何(なに)</h2><ul>
-<li><strong>接续：</strong> (1) なに + 助词(が、と、に、で、を)</li>
-<li><strong>意义：</strong> 未知事物. “什么…”.<br><strong><code>何[なに]</code>を食[た]べますか。</strong><br>你吃什么?<br><strong><code>何[なに]</code>で東京[とうきょう]へ行[い]きますか。</strong><br>你乘什么车去东京?</li>
-<li><strong>接续：</strong> (2) なに + 名词</li>
-<li><strong>意义：</strong> 未知事物. “什么…”.<br>A <strong>「<code>何[なに]</code>色[いろ]のセーター(se-.ta-)を買[か]いますか。」</strong><br>你要买什么颜色的毛衣?<br>B <strong>「白[しろ]いのか青[あお]いのを買[か]います。」</strong><br>买白色的或者蓝色的.<br><strong>「あなたの国[くに]では<code>何</code>[なに]語[ご]を話[はな]しますか。」</strong><br>你们国家使用的是什么语言?</li>
-</ul>
-<h2 id="◯-何-なん"><a href="#◯-何-なん" class="headerlink" title="◯ 何(なん)"></a>◯ 何(なん)</h2><ul>
-<li><strong>接续：</strong> (1) なん + の + 名词</li>
-<li><strong>意义：</strong> 作疑问句中的定语. “什么…”.<br><strong>それは<code>何[なん]</code>の雑誌[ざっし]ですか。</strong><br>那是什么杂志?<br><strong>冷蔵庫[れいぞうこ]に<code>何[なん]</code>の食[た]べる物[もの]もないです。</strong><br>冰箱里没有任何吃的东西.</li>
-<li><strong>接续：</strong> (2) なん + ですか</li>
-<li><strong>意义：</strong> 作疑问句谓语. “…是什么”.<br><strong>それは<code>何[なん]</code>ですか。</strong><br>那是什么?<br><strong>この耳[みみ]が大[おお]きい動物[どうぶつ]は<code>何[なん]</code>ですか。</strong><br>这个耳朵大大的动物是什么?</li>
-<li><strong>接续：</strong> (3) なん + 量词</li>
-<li><strong>意义：</strong> 询问多少数量. “多少…”.<br><strong>本を<code>何</code>冊[さつ]買[か]いましたか。</strong><br>买了几本书?<br><strong><code>何[なん]</code>人[にん]で行[い]きますか。</strong><br>一共几个人去?</li>
-<li><strong>接续：</strong> (4) なん + と + 动</li>
-<li><strong>意义：</strong> 未知内容. “…什么”.<br><strong>お名前[なまえ]は<code>何[なん]</code>と言[い]いますか。</strong><br>你叫什么名字?<br><strong>この漢字[かんじ]は<code>何[なん]</code>と読[よ]みますか。</strong><br>这个汉字怎么读?</li>
+</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/23/n5-%E7%96%91%E9%97%AE%E8%AF%8D/#more" rel="contents">
+              <a class="btn" href="/2020/06/01/n4-%E5%8A%A9%E8%AF%8D-%E6%A0%BC%E5%8A%A9%E8%AF%8D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -1119,7 +1095,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/42/"><i class="fa fa-angle-left" aria-label="前のページ"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/44/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
+    <a class="extend prev" rel="prev" href="/page/42/"><i class="fa fa-angle-left" aria-label="前のページ"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/44/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
   </nav>
 
 </div>
@@ -1143,14 +1119,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>単語の総数：</span>
-    <span title="単語の総数">584k</span>
+    <span title="単語の総数">611k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>読書の合計時間 &asymp;</span>
-    <span title="読書の合計時間">16:13</span>
+    <span title="読書の合計時間">16:59</span>
   </span>
 </div>
 
