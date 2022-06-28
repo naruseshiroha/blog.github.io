@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">319</span>
+          <span class="site-state-item-count">342</span>
           <span class="site-state-item-name">ポスト</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">252</span>
+        <span class="site-state-item-count">254</span>
         <span class="site-state-item-name">タグ</span></a>
       </div>
   </nav>
@@ -242,7 +242,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E8%AF%BE%E6%96%87/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/06/28/docker-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -255,7 +255,1138 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下21课文</a>
+          <a href="/2022/06/28/docker-note/" class="post-title-link" itemprop="url">docker 入门</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+      
+
+      <time title="作成日：2022-06-28 10:16:04 / 修正日：18:03:15" itemprop="dateCreated datePublished" datetime="2022-06-28T10:16:04+09:00">2022-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>41k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>1:09</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>官网：<a target="_blank" rel="noopener" href="https://docs.docker.com/">https://docs.docker.com/</a></p>
+</blockquote>
+<p>容器就是将软件打包成标准化单元，以用于开发、交付和部署。</p>
+<ul>
+<li>容器镜像是轻量的、可执行的独立软件包 ，包含软件运行所需的所有内容：代码、运行时环境、系统工具、系统库和设置。</li>
+<li>容器化软件适用于基于 Linux 和 Windows 的应用，在任何环境中都能够始终如一地运行。</li>
+<li>容器赋予了软件独立性，使其免受外在环境差异（例如，开发和预演环境的差异）的影响，从而有助于减少团队间在相同基础设施上运行不同软件时的冲突。</li>
+</ul>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><p>Docker 中有非常重要的三个基本概念，理解了这三个概念，就理解了 Docker 的整个生命周期。<br><a href="/images/docker/docker-architecture.svg"><img src='/images/docker/docker-architecture.svg' /></a></p>
+<ul>
+<li>Image(镜像)<br>Docker 镜像（Image）就是一个只读的模板。镜像可以用来创建 Docker 容器，一个镜像可以创建很多容器。</li>
+<li>Container(容器)<br>Docker 利用容器（Container）独立运行一个或一组应用。容器是使用镜像创建的运行实例。<br>它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。</li>
+<li>Repository(仓库)<br>仓库（Repository）是集中存放镜像文件的场所。</li>
+</ul>
+<h2 id="安装-amp-卸载"><a href="#安装-amp-卸载" class="headerlink" title="安装&amp;卸载"></a>安装&amp;卸载</h2><blockquote>
+<p>安装</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># 1.卸载
+ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+# 2.需要的安装包
+ sudo yum install -y yum-utils
+
+# 3.设置镜像的仓库
+ sudo yum-config-manager \
+    --add-repo \
+    https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo
+
+
+# 更新 yum 软件包索引
+ sudo yum makecache fast
+
+# 4.安装 docker （ce:社区版，ee：企业版）
+ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# 5.启动 docker
+ sudo systemctl start docker
+
+# 6.判断是否安装成功
+ docker version
+
+# 7.hello-world
+ sudo docker run hello-world
+
+# 8.查看 docker 镜像
+
+ sudo docker images
+</code></pre>
+
+<blockquote>
+<p>卸载</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># 1.卸载依赖
+ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
+# 2.删除资源
+ sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker
+ sudo rm -rf &#x2F;var&#x2F;lib&#x2F;containerd
+
+# &#x2F;var&#x2F;lib&#x2F;docker docker 默认工作目录</code></pre>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><blockquote>
+<p>帮助文档: <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">https://docs.docker.com/engine/reference/commandline/docker/</a></p>
+</blockquote>
+<h3 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h3><pre class="language-none"><code class="language-none">docker version              # 显示 docker 版本信息
+docker info                 # 显示 docker 系统信息，包括镜像和容器的数量
+docker [command] --help     # 帮指命令</code></pre>
+
+<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><blockquote>
+<p>docker images: 查看所有本地主机上的镜像</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+# List images
+
+# Options:
+# -a, --all             Show all images (default hides intermediate images)
+# -q, --quiet           Only show image IDs
+
+# [lixun@aliecs ~]$ docker images
+# (仓库源)       (标签)     (ID)           (创建时间)      (大小)
+# REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+# hello-world   latest    feb5d9fea6a5   9 months ago   13.3kB</code></pre>
+
+<blockquote>
+<p>docker search: 搜索镜像</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell">docker search $&#123;imageName&#125; [-f(k&#x3D;v)]
+# Usage:  docker search [OPTIONS] TERM
+
+# Search the Docker Hub for images
+
+# Options:
+# -f, --filter filter   Filter output based on conditions provided
+
+# [lixun@aliecs ~]$ docker search mysql -f stars&#x3D;3000
+# NAME      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+# mysql     MySQL is a widely used, open-source relation…   12782     [OK]
+# mariadb   MariaDB Server is a high performing open sou…   4909      [OK]</code></pre>
+
+<blockquote>
+<p>docker pull: 下载镜像</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+# Pull an image or a repository from a registry
+
+# docker pull hello-world &#x3D;&gt; docker pull docker.io&#x2F;library&#x2F;hello-world:latest
+
+# [lixun@aliecs ~]$ docker pull hello-world
+# Using default tag: latest
+# latest: Pulling from library&#x2F;hello-world
+# 2db29710123e: Pull complete
+# Digest: sha256:2498fce14358aa50ead0cc6c19990fc6ff866ce72aeb5546e1d59caac3d0d60f
+# Status: Downloaded newer image for hello-world:latest
+# docker.io&#x2F;library&#x2F;hello-world:latest</code></pre>
+
+<blockquote>
+<p>docker rmi: 删除镜像</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+# Remove one or more images
+
+# Options:
+#   -f, --force      Force removal of the image
+#       --no-prune   Do not delete untagged parents
+
+# 可以通过 REPOSITORY | ID | $()
+# [lixun@aliecs ~]$ docker rmi hello-world:latest
+# Untagged: hello-world:latest
+# Untagged: hello-world@sha256:2498fce14358aa50ead0cc6c19990fc6ff866ce72aeb5546e1d59caac3d0d60f
+# Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
+# Deleted: sha256:e07ee1baac5fae6a26f30cabfe54a36d3402f96afda318fe0a96cec4ca393359
+
+# 1.查询所有ID：     docker images -q
+# 2.将IDs传给 rmi：  docker rmi $(docker images -q)</code></pre>
+
+<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><blockquote>
+<p>docker run: 新建容器并运行镜像</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+# Run a command in a new container
+
+# Options:
+#     --name string                    Assign a name to the container
+# -d, --detach                         Run container in background and print container ID
+# -i, --interactive                    Keep STDIN open even if not attached
+# -t, --tty                            Allocate a pseudo-TTY
+
+# -p, --publish list                   Publish a container&#39;s port(s) to the host
+    # -p ip:主机端口:容器端口
+    # -p 主机端口:容器端口
+    # -p 容器端口
+    # 容器端口
+# -P, --publish-all                    Publish all exposed ports to random ports</code></pre>
+
+<blockquote>
+<p>进入容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs &#x2F;]$ docker run -it --name docker_centos centos &#x2F;bin&#x2F;bash
+[root@e7e8837a0363 &#x2F;]# ls
+# bin  etc   lib    lost+found  mnt  proc  run   srv  tmp  var
+# dev  home  lib64  media       opt  root  sbin  sys  usr</code></pre>
+
+<blockquote>
+<p>exit: 从容器中退出,并关闭容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[root@e7e8837a0363 &#x2F;]# exit
+# exit</code></pre>
+
+<blockquote>
+<p>Ctrl+P+Q: 退出容器,但不关闭容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[root@e7e8837a0363 &#x2F;]# 按 Ctrl+P+Q</code></pre>
+
+<blockquote>
+<p>docker exec &amp; docker attach: 进入运行中的容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># exec 开启一个新的终端
+
+# Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+# Run a command in a running container
+[lixun@aliecs &#x2F;]$ docker exec -it e7e8 &#x2F;bin&#x2F;bash
+[root@e7e8837a0363 &#x2F;]# &#x3D;
+
+# attach 进入容器正在执行的终端
+[lixun@aliecs &#x2F;]$ docker attach e7e8
+[root@e7e8837a0363 &#x2F;]# ls
+# bin  etc   lib    lost+found  mnt  proc  run   srv  tmp  var
+# dev  home  lib64  media       opt  root  sbin  sys  usr</code></pre>
+
+<blockquote>
+<p>docker ps: 列出容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker ps [OPTIONS]
+
+# List containers
+
+# Options:
+#   -a, --all             Show all containers (default shows just running)
+#   -f, --filter filter   Filter output based on conditions provided
+#   -q, --quiet           Only display container IDs
+
+# 运行的
+[lixun@aliecs &#x2F;]$ docker ps -a
+# CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+# e7e8837a0363   centos      &quot;&#x2F;bin&#x2F;bash&quot;              12 minutes ago   Up 10 minutes                                                          docker_centos
+# ALL
+[lixun@aliecs &#x2F;]$ docker ps -a
+# CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                     PORTS                                                  NAMES
+# 0ccbedd3924f   hello-world   &quot;&#x2F;hello&quot;                 4 minutes ago    Exited (0) 4 minutes ago                                                          goofy_chebyshev
+# e7e8837a0363   centos        &quot;&#x2F;bin&#x2F;bash&quot;              19 minutes ago   Up 16 minutes                                                                     docker_centos</code></pre>
+
+<blockquote>
+<p>docker rm: 删除容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+# Remove one or more containers
+
+# Options:
+#   -f, --force     Force the removal of a running container (uses SIGKILL)
+
+# ID 能确定唯一一个的时候,可以省略后面的
+[lixun@aliecs &#x2F;]$ docker rm f01f02
+# f01f02</code></pre>
+
+<blockquote>
+<p>docker start | restart : 启动容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker start [OPTIONS] CONTAINER [CONTAINER...]
+
+# Start one or more stopped containers
+
+# Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
+
+# Restart one or more containers</code></pre>
+
+<blockquote>
+<p>docker start | restart : 停止容器</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+# Stop one or more running containers
+
+# Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+# Kill one or more running containers</code></pre>
+
+<h3 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h3><blockquote>
+<p>docker run -d</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs ~]$ docker run -d centos
+# eff9e88cae00d02f8d3d79270b088a0b624087f36a5473086f13b9ab5b682c0c
+
+# 发现 centos 停止了
+# [lixun@aliecs ~]$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED        STATUS        PORTS                                                  NAMES
+
+# [注意]：docker 容器使用后天运行,就必须要有一个前台进程,docker 发现没有应用,就会自动停止</code></pre>
+
+<blockquote>
+<p>docker logs : 查看日志</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker logs [OPTIONS] CONTAINER
+
+# Fetch the logs of a container
+
+# Options:
+#   -f, --follow         Follow log output
+#   -n, --tail string    Number of lines to show from the end of the logs (default &quot;all&quot;)
+#   -t, --timestamps     Show timestamps
+
+[lixun@aliecs ~]$ docker logs nginx -n 10 -t
+# 2022-04-13T05:12:44.976028040Z &#x2F;docker-entrypoint.sh: &#x2F;docker-entrypoint.d&#x2F; is not empty, will attempt to perform configuration
+# 2022-04-13T05:12:44.976078133Z &#x2F;docker-entrypoint.sh: Looking for shell scripts in &#x2F;docker-entrypoint.d&#x2F;2022-04-13T05:12:44.982263106Z &#x2F;docker-entrypoint.sh: Launching &#x2F;docker-entrypoint.d&#x2F;10-listen-on-ipv6-by-default.sh
+# 2022-04-13T05:12:44.998960474Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf
+# 2022-04-13T05:12:45.013403856Z 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf
+# 2022-04-13T05:12:45.013428008Z &#x2F;docker-entrypoint.sh: Launching &#x2F;docker-entrypoint.d&#x2F;20-envsubst-on-templates.sh
+# 2022-04-13T05:12:45.017048794Z &#x2F;docker-entrypoint.sh: Launching &#x2F;docker-entrypoint.d&#x2F;30-tune-worker-processes.sh
+# 2022-04-13T05:12:45.018499309Z &#x2F;docker-entrypoint.sh: Configuration complete; ready for start up</code></pre>
+
+<blockquote>
+<p>docker ps: 查看容器进程信息</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker top CONTAINER [ps OPTIONS]
+
+# Display the running processes of a container
+
+[lixun@aliecs ~]$ docker top nginx
+# UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+# root                3561006             3560988             0                   Apr13               ?                   00:00:00            nginx: master process nginx -g daemon off;
+# 101                 3561057             3561006             0                   Apr13               ?                   00:00:00            nginx: worker process</code></pre>
+
+<blockquote>
+<p>docker inspect: 查看容器信息</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+
+# Return low-level information on Docker objects
+
+# Options:
+#   -f, --format string   Format the output using the given Go template
+
+[lixun@aliecs ~]$ docker inspect nginx
+# [
+#     &#123;
+#         &quot;Id&quot;: &quot;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518&quot;,
+#         &quot;Created&quot;: &quot;2022-04-13T05:12:44.23192873Z&quot;,
+#         &quot;Path&quot;: &quot;&#x2F;docker-entrypoint.sh&quot;,
+#         &quot;Args&quot;: [
+#             &quot;nginx&quot;,
+#             &quot;-g&quot;,
+#             &quot;daemon off;&quot;
+#         ],
+#         &quot;State&quot;: &#123;
+#             &quot;Status&quot;: &quot;running&quot;,
+#             &quot;Running&quot;: true,
+#             &quot;Paused&quot;: false,
+#             &quot;Restarting&quot;: false,
+#             &quot;OOMKilled&quot;: false,
+#             &quot;Dead&quot;: false,
+#             &quot;Pid&quot;: 3561006,
+#             &quot;ExitCode&quot;: 0,
+#             &quot;Error&quot;: &quot;&quot;,
+#             &quot;StartedAt&quot;: &quot;2022-04-13T05:12:44.929720623Z&quot;,
+#             &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+#         &#125;,
+#         &quot;Image&quot;: &quot;sha256:605c77e624ddb75e6110f997c58876baa13f8754486b461117934b24a9dc3a85&quot;,
+#         &quot;ResolvConfPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518&#x2F;resolv.conf&quot;,
+#         &quot;HostnamePath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518&#x2F;hostname&quot;,
+#         &quot;HostsPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518&#x2F;hosts&quot;,
+#         &quot;LogPath&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;containers&#x2F;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518&#x2F;bba6a4b9a5726006a29cb02c687c0331883eb2d582df88a3438fc3cc09159518-json.log&quot;,
+#         &quot;Name&quot;: &quot;&#x2F;nginx&quot;,
+#         &quot;RestartCount&quot;: 0,
+#         &quot;Driver&quot;: &quot;overlay2&quot;,
+#         &quot;Platform&quot;: &quot;linux&quot;,
+#         &quot;MountLabel&quot;: &quot;&quot;,
+#         &quot;ProcessLabel&quot;: &quot;&quot;,
+#         &quot;AppArmorProfile&quot;: &quot;&quot;,
+#         &quot;ExecIDs&quot;: null,
+#         &quot;HostConfig&quot;: &#123;
+#             &quot;Binds&quot;: [
+#                 &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;www:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&quot;,
+#                 &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;conf&#x2F;nginx.conf:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf&quot;,
+#                 &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;logs:&#x2F;var&#x2F;log&#x2F;nginx&quot;
+#             ],
+#             &quot;ContainerIDFile&quot;: &quot;&quot;,
+#             &quot;LogConfig&quot;: &#123;
+#                 &quot;Type&quot;: &quot;json-file&quot;,
+#                 &quot;Config&quot;: &#123;&#125;
+#             &#125;,
+#             &quot;NetworkMode&quot;: &quot;default&quot;,
+#             &quot;PortBindings&quot;: &#123;
+#                 &quot;80&#x2F;tcp&quot;: [
+#                     &#123;
+#                         &quot;HostIp&quot;: &quot;&quot;,
+#                         &quot;HostPort&quot;: &quot;6203&quot;
+#                     &#125;
+#                 ]
+#             &#125;,
+#             &quot;RestartPolicy&quot;: &#123;
+#                 &quot;Name&quot;: &quot;no&quot;,
+#                 &quot;MaximumRetryCount&quot;: 0
+#             &#125;,
+#             &quot;AutoRemove&quot;: true,
+#             &quot;VolumeDriver&quot;: &quot;&quot;,
+#             &quot;VolumesFrom&quot;: null,
+#             &quot;CapAdd&quot;: null,
+#             &quot;CapDrop&quot;: null,
+#             &quot;CgroupnsMode&quot;: &quot;host&quot;,
+#             &quot;Dns&quot;: [],
+#             &quot;DnsOptions&quot;: [],
+#             &quot;DnsSearch&quot;: [],
+#             &quot;ExtraHosts&quot;: null,
+#             &quot;GroupAdd&quot;: null,
+#             &quot;IpcMode&quot;: &quot;private&quot;,
+#             &quot;Cgroup&quot;: &quot;&quot;,
+#             &quot;Links&quot;: null,
+#             &quot;OomScoreAdj&quot;: 0,
+#             &quot;PidMode&quot;: &quot;&quot;,
+#             &quot;Privileged&quot;: false,
+#             &quot;PublishAllPorts&quot;: false,
+#             &quot;ReadonlyRootfs&quot;: false,
+#             &quot;SecurityOpt&quot;: null,
+#             &quot;UTSMode&quot;: &quot;&quot;,
+#             &quot;UsernsMode&quot;: &quot;&quot;,
+#             &quot;ShmSize&quot;: 67108864,
+#             &quot;Runtime&quot;: &quot;runc&quot;,
+#             &quot;ConsoleSize&quot;: [
+#                 0,
+#                 0
+#             ],
+#             &quot;Isolation&quot;: &quot;&quot;,
+#             &quot;CpuShares&quot;: 0,
+#             &quot;Memory&quot;: 0,
+#             &quot;NanoCpus&quot;: 0,
+#             &quot;CgroupParent&quot;: &quot;&quot;,
+#             &quot;BlkioWeight&quot;: 0,
+#             &quot;BlkioWeightDevice&quot;: [],
+#             &quot;BlkioDeviceReadBps&quot;: null,
+#             &quot;BlkioDeviceWriteBps&quot;: null,
+#             &quot;BlkioDeviceReadIOps&quot;: null,
+#             &quot;BlkioDeviceWriteIOps&quot;: null,
+#             &quot;CpuPeriod&quot;: 0,
+#             &quot;CpuQuota&quot;: 0,
+#             &quot;CpuRealtimePeriod&quot;: 0,
+#             &quot;CpuRealtimeRuntime&quot;: 0,
+#             &quot;CpusetCpus&quot;: &quot;&quot;,
+#             &quot;CpusetMems&quot;: &quot;&quot;,
+#             &quot;Devices&quot;: [],
+#             &quot;DeviceCgroupRules&quot;: null,
+#             &quot;DeviceRequests&quot;: null,
+#             &quot;KernelMemory&quot;: 0,
+#             &quot;KernelMemoryTCP&quot;: 0,
+#             &quot;MemoryReservation&quot;: 0,
+#             &quot;MemorySwap&quot;: 0,
+#             &quot;MemorySwappiness&quot;: null,
+#             &quot;OomKillDisable&quot;: false,
+#             &quot;PidsLimit&quot;: null,
+#             &quot;Ulimits&quot;: null,
+#             &quot;CpuCount&quot;: 0,
+#             &quot;CpuPercent&quot;: 0,
+#             &quot;IOMaximumIOps&quot;: 0,
+#             &quot;IOMaximumBandwidth&quot;: 0,
+#             &quot;MaskedPaths&quot;: [
+#                 &quot;&#x2F;proc&#x2F;asound&quot;,
+#                 &quot;&#x2F;proc&#x2F;acpi&quot;,
+#                 &quot;&#x2F;proc&#x2F;kcore&quot;,
+#                 &quot;&#x2F;proc&#x2F;keys&quot;,
+#                 &quot;&#x2F;proc&#x2F;latency_stats&quot;,
+#                 &quot;&#x2F;proc&#x2F;timer_list&quot;,
+#                 &quot;&#x2F;proc&#x2F;timer_stats&quot;,
+#                 &quot;&#x2F;proc&#x2F;sched_debug&quot;,
+#                 &quot;&#x2F;proc&#x2F;scsi&quot;,
+#                 &quot;&#x2F;sys&#x2F;firmware&quot;
+#             ],
+#             &quot;ReadonlyPaths&quot;: [
+#                 &quot;&#x2F;proc&#x2F;bus&quot;,
+#                 &quot;&#x2F;proc&#x2F;fs&quot;,
+#                 &quot;&#x2F;proc&#x2F;irq&quot;,
+#                 &quot;&#x2F;proc&#x2F;sys&quot;,
+#                 &quot;&#x2F;proc&#x2F;sysrq-trigger&quot;
+#             ]
+#         &#125;,
+#         &quot;GraphDriver&quot;: &#123;
+#             &quot;Data&quot;: &#123;
+#                 &quot;LowerDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;d80d163f4b9045b6911aaa8981bbb70b0d8debc6870210718b7e3c32a6f886ca-init&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;79a03c67449efe18e3e9105f863a8e4ba81ae1a4b04ace16a968209dc43a35c0&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;6d904ff6e200aebe24a95a821e789ce098fec352fed00bffbf9550241bb11325&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;7350d8179cbd3c0eacd5db5a3b0388d7f75d3ec61de118bf6513730a86b2b7ed&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;bb4a102a2d8f29cfc21032cbd685ea05241998c8894f92cd41f604527e84c867&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;aad36878d63972d28a992e0816fce1b451545592bc1b405e0aeb9cc5dd2605da&#x2F;diff:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;6da0630914ffb81f76737df0b3b0e1c1244ae54cfd28d653898676997663e911&#x2F;diff&quot;,
+#                 &quot;MergedDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;d80d163f4b9045b6911aaa8981bbb70b0d8debc6870210718b7e3c32a6f886ca&#x2F;merged&quot;,
+#                 &quot;UpperDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;d80d163f4b9045b6911aaa8981bbb70b0d8debc6870210718b7e3c32a6f886ca&#x2F;diff&quot;,
+#                 &quot;WorkDir&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2&#x2F;d80d163f4b9045b6911aaa8981bbb70b0d8debc6870210718b7e3c32a6f886ca&#x2F;work&quot;
+#             &#125;,
+#             &quot;Name&quot;: &quot;overlay2&quot;
+#         &#125;,
+#         &quot;Mounts&quot;: [
+#             &#123;
+#                 &quot;Type&quot;: &quot;bind&quot;,
+#                 &quot;Source&quot;: &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;www&quot;,
+#                 &quot;Destination&quot;: &quot;&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&quot;,
+#                 &quot;Mode&quot;: &quot;&quot;,
+#                 &quot;RW&quot;: true,
+#                 &quot;Propagation&quot;: &quot;rprivate&quot;
+#             &#125;,
+#             &#123;
+#                 &quot;Type&quot;: &quot;bind&quot;,
+#                 &quot;Source&quot;: &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;conf&#x2F;nginx.conf&quot;,
+#                 &quot;Destination&quot;: &quot;&#x2F;etc&#x2F;nginx&#x2F;nginx.conf&quot;,
+#                 &quot;Mode&quot;: &quot;&quot;,
+#                 &quot;RW&quot;: true,
+#                 &quot;Propagation&quot;: &quot;rprivate&quot;
+#             &#125;,
+#             &#123;
+#                 &quot;Type&quot;: &quot;bind&quot;,
+#                 &quot;Source&quot;: &quot;&#x2F;home&#x2F;lixun&#x2F;nginx&#x2F;logs&quot;,
+#                 &quot;Destination&quot;: &quot;&#x2F;var&#x2F;log&#x2F;nginx&quot;,
+#                 &quot;Mode&quot;: &quot;&quot;,
+#                 &quot;RW&quot;: true,
+#                 &quot;Propagation&quot;: &quot;rprivate&quot;
+#             &#125;
+#         ],
+#         &quot;Config&quot;: &#123;
+#             &quot;Hostname&quot;: &quot;bba6a4b9a572&quot;,
+#             &quot;Domainname&quot;: &quot;&quot;,
+#             &quot;User&quot;: &quot;&quot;,
+#             &quot;AttachStdin&quot;: false,
+#             &quot;AttachStdout&quot;: false,
+#             &quot;AttachStderr&quot;: false,
+#             &quot;ExposedPorts&quot;: &#123;
+#                 &quot;80&#x2F;tcp&quot;: &#123;&#125;
+#             &#125;,
+#             &quot;Tty&quot;: false,
+#             &quot;OpenStdin&quot;: false,
+#             &quot;StdinOnce&quot;: false,
+#             &quot;Env&quot;: [
+#                 &quot;PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin&quot;,
+#                 &quot;NGINX_VERSION&#x3D;1.21.5&quot;,
+#                 &quot;NJS_VERSION&#x3D;0.7.1&quot;,
+#                 &quot;PKG_RELEASE&#x3D;1~bullseye&quot;
+#             ],
+#             &quot;Cmd&quot;: [
+#                 &quot;nginx&quot;,
+#                 &quot;-g&quot;,
+#                 &quot;daemon off;&quot;
+#             ],
+#             &quot;Image&quot;: &quot;nginx&quot;,
+#             &quot;Volumes&quot;: null,
+#             &quot;WorkingDir&quot;: &quot;&quot;,
+#             &quot;Entrypoint&quot;: [
+#                 &quot;&#x2F;docker-entrypoint.sh&quot;
+#             ],
+#             &quot;OnBuild&quot;: null,
+#             &quot;Labels&quot;: &#123;
+#                 &quot;maintainer&quot;: &quot;NGINX Docker Maintainers &lt;docker-maint@nginx.com&gt;&quot;
+#             &#125;,
+#             &quot;StopSignal&quot;: &quot;SIGQUIT&quot;
+#         &#125;,
+#         &quot;NetworkSettings&quot;: &#123;
+#             &quot;Bridge&quot;: &quot;&quot;,
+#             &quot;SandboxID&quot;: &quot;e3a0ccdb0bba851da103f0bd00bb1e933f551b36b701b18e00b01573bac6168b&quot;,
+#             &quot;HairpinMode&quot;: false,
+#             &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+#             &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+#             &quot;Ports&quot;: &#123;
+#                 &quot;80&#x2F;tcp&quot;: [
+#                     &#123;
+#                         &quot;HostIp&quot;: &quot;0.0.0.0&quot;,
+#                         &quot;HostPort&quot;: &quot;6203&quot;
+#                     &#125;,
+#                     &#123;
+#                         &quot;HostIp&quot;: &quot;::&quot;,
+#                         &quot;HostPort&quot;: &quot;6203&quot;
+#                     &#125;
+#                 ]
+#             &#125;,
+#             &quot;SandboxKey&quot;: &quot;&#x2F;var&#x2F;run&#x2F;docker&#x2F;netns&#x2F;e3a0ccdb0bba&quot;,
+#             &quot;SecondaryIPAddresses&quot;: null,
+#             &quot;SecondaryIPv6Addresses&quot;: null,
+#             &quot;EndpointID&quot;: &quot;1d7b07de666ebebf7a1b22300010559b1522b6c22a3c0a92580e7c27ae884ca6&quot;,
+#             &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+#             &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+#             &quot;GlobalIPv6PrefixLen&quot;: 0,
+#             &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+#             &quot;IPPrefixLen&quot;: 16,
+#             &quot;IPv6Gateway&quot;: &quot;&quot;,
+#             &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+#             &quot;Networks&quot;: &#123;
+#                 &quot;bridge&quot;: &#123;
+#                     &quot;IPAMConfig&quot;: null,
+#                     &quot;Links&quot;: null,
+#                     &quot;Aliases&quot;: null,
+#                     &quot;NetworkID&quot;: &quot;45d7ef54759370db4f3d6be01c20731ae8124778aa8a1a2861aeac375ae5fc5d&quot;,
+#                     &quot;EndpointID&quot;: &quot;1d7b07de666ebebf7a1b22300010559b1522b6c22a3c0a92580e7c27ae884ca6&quot;,
+#                     &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+#                     &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+#                     &quot;IPPrefixLen&quot;: 16,
+#                     &quot;IPv6Gateway&quot;: &quot;&quot;,
+#                     &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+#                     &quot;GlobalIPv6PrefixLen&quot;: 0,
+#                     &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+#                     &quot;DriverOpts&quot;: null
+#                 &#125;
+#             &#125;
+#         &#125;
+#     &#125;
+# ]</code></pre>
+
+<blockquote>
+<p>docker cp: 从容器中拷贝文件</p>
+</blockquote>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+#         docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+
+# Copy files&#x2F;folders between a container and the local filesystem
+
+# Use &#39;-&#39; as the source to read a tar archive from stdin
+# and extract it to a directory destination in a container.
+# Use &#39;-&#39; as the destination to stream a tar archive of a
+# container source to stdout.
+
+[lixun@aliecs docker]$ docker cp $(docker ps -q -f name&#x3D;docker_centos):&#x2F;home&#x2F;docker&#x2F;Main.java .&#x2F;
+[lixun@aliecs docker]$ ls
+# Hello.java  Main.java
+[lixun@aliecs docker]$ cat Main.java
+# public class Main &#123;
+#         public static void main(String[] args) &#123;
+#                 System.out.println(&quot;Hello, Docker CentOS!&quot;);
+#         &#125;
+# &#125;</code></pre>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><a href="/images/docker/docker-command.jpg"><img src='/images/docker/docker-command.jpg' /></a></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"># 当前 shell 下 attach 连接指定运行镜像
+# attach        Attach to a running container
+# 通过 Dockerfile 定制镜像
+# build         Build an image from a Dockerfile
+# 提交当前容器为新的镜像
+# commit        Create a new image from a container&#39;s changes
+# 从容器中拷贝指定文件或者目录到宿主机中
+# cp            Copy files&#x2F;folders from a container to a HOSTDIR or to STDOUT
+# 创建一个新的容器，同 run 但不启动容器
+# create        Create a new container
+# 查看 docker 容器变化
+# diff          Inspect changes on a container&#39;s filesystem
+# 从 docker 服务获取容器实时事件
+# events        Get real time events from the server
+# 在已存在的容器上运行命令
+# exec          Run a command in a running container
+# 导出容器的内容流作为一个 tar 归档文件(对应 import)
+# export        Export a container&#39;s filesystem as a tar archive
+# 展示一个镜像形成历史
+# history       Show the history of an image
+# 列出系统当前镜像
+# images        List images
+# 从 tar 包中的内容创建一个新的文件系统映像(对应 export)
+# import        Import the contents from a tarball to create a filesystem image
+# 显示系统相关信息
+# info          Display system-wide information
+# 查看容器详细信息
+# inspect       Return low-level information on a container or image
+# kill 指定 docker 容器
+# kill          Kill a running container
+# 从一个 tar 包中加载一个镜像(对应 save)
+# load          Load an image from a tar archive or STDIN
+# 注册或者登陆一个 docker 源服务器
+# login         Register or log in to a Docker registry
+# 从当前 Docker registry 退出
+# logout        Log out from a Docker registry
+# 输出当前容器日志信息
+# logs          Fetch the logs of a container
+# 暂停容器
+# pause         Pause all processes within a container
+# 查看映射端口对应的容器内部源端口
+# port          List port mappings or a specific mapping for the CONTAINER
+# 列出容器列表
+# ps            List containers
+# 从 docker 镜像源服务器拉取指定镜像或者库镜像
+# pull          Pull an image or a repository from a registry
+# 推送指定镜像或者库镜像至 docker 源服务器
+# push          Push an image or a repository to a registry
+# 重命名容器
+# rename        Rename a container
+# 重启运行的容器
+# restart       Restart a running container
+# 移除一个或者多个容器
+# rm            Remove one or more containers
+# 移除一个或多个镜像(无容器使用该镜像才可以删除，否则需要删除相关容器才可以继续或者 -f 强制删除)
+# rmi           Remove one or more images
+# 创建一个新的容器并运行一个命令
+# run           Run a command in a new container
+# 保存一个镜像为一个 tar 包(对应 load)
+# save          Save an image(s) to a tar archive
+# 在 docker hub 中搜索镜像
+# search        Search the Docker Hub for images
+# 启动容器
+# start         Start one or more stopped containers
+# 统计容器使用资源
+# stats         Display a live stream of container(s) resource usage statistics
+# 停止容器
+# stop          Stop a running container
+# 给源中镜像打标签
+# tag           Tag an image into a repository
+# 查看容器中运行的进程信息
+# top           Display the running processes of a container
+# 取消暂停容器
+# unpause       Unpause all processes within a container
+# 查看容器版本号
+# version       Show the Docker version information
+# 截取容器停止时的退出状态值
+# wait          Block until a container stops, then print its exit code</code></pre>
+
+<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><pre class="language-shell" data-language="shell"><code class="language-shell"># 1.search
+[lixun@aliecs ~]$ docker search nginx -f stars&#x3D;1000
+# NAME      DESCRIPTION                STARS     OFFICIAL   AUTOMATED
+# nginx     Official build of Nginx.   17006     [OK]
+
+# 2.pull
+[lixun@aliecs ~]$ docker pull nginx
+# Using default tag: latest
+# latest: Pulling from library&#x2F;nginx
+# a2abf6c4d29d: Already exists
+# a9edb18cadd1: Pull complete
+# 589b7251471a: Pull complete
+# 186b1aaa4aa6: Pull complete
+# b4df32aa5a72: Pull complete
+# a0bcbecc962e: Pull complete
+# Digest: sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31
+# Status: Downloaded newer image for nginx:latest
+# docker.io&#x2F;library&#x2F;nginx:latest
+
+# 3.run
+[lixun@aliecs ~]$ docker run -d --name nginx -p 6200:80 nginx
+# 4c0dbb4322be3abf0d6ef4d6c89ec236b1f19281f16c77d8314742086f3efb91
+[lixun@aliecs ~]$ docker ps
+# CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+# 4c0dbb4322be   nginx       &quot;&#x2F;docker-entrypoint.…&quot;   2 seconds ago    Up 1 second     0.0.0.0:6200-&gt;80&#x2F;tcp, :::6200-&gt;80&#x2F;tcp                  nginx
+
+# 4.test
+[lixun@aliecs ~]$ curl localhost:6200
+# &lt;!DOCTYPE html&gt;
+# &lt;html&gt;
+# &lt;head&gt;
+# &lt;title&gt;Welcome to nginx!&lt;&#x2F;title&gt;
+# &lt;style&gt;
+# html &#123; color-scheme: light dark; &#125;
+# body &#123; width: 35em; margin: 0 auto;
+# font-family: Tahoma, Verdana, Arial, sans-serif; &#125;
+# &lt;&#x2F;style&gt;
+# &lt;&#x2F;head&gt;
+# &lt;body&gt;
+# &lt;h1&gt;Welcome to nginx!&lt;&#x2F;h1&gt;
+# &lt;p&gt;If you see this page, the nginx web server is successfully installed and
+# working. Further configuration is required.&lt;&#x2F;p&gt;
+
+# &lt;p&gt;For online documentation and support please refer to
+# &lt;a href&#x3D;&quot;http:&#x2F;&#x2F;nginx.org&#x2F;&quot;&gt;nginx.org&lt;&#x2F;a&gt;.&lt;br&#x2F;&gt;
+# Commercial support is available at
+# &lt;a href&#x3D;&quot;http:&#x2F;&#x2F;nginx.com&#x2F;&quot;&gt;nginx.com&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+
+# &lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+# &lt;&#x2F;body&gt;
+# &lt;&#x2F;html&gt;
+
+# 5.nginx
+[lixun@aliecs ~]$ docker exec -it nginx &#x2F;bin&#x2F;bash
+root@4c0dbb4322be:&#x2F;# whereis nginx
+# nginx: &#x2F;usr&#x2F;sbin&#x2F;nginx &#x2F;usr&#x2F;lib&#x2F;nginx &#x2F;etc&#x2F;nginx &#x2F;usr&#x2F;share&#x2F;nginx</code></pre>
+
+<h3 id="安装-Tomcat"><a href="#安装-Tomcat" class="headerlink" title="安装 Tomcat"></a>安装 Tomcat</h3><pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs docker]$ docker search tomcat -f stars&#x3D;1000
+# NAME      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+# tomcat    Apache Tomcat is an open source implementati…   3345      [OK]
+
+[lixun@aliecs docker]$ docker pull tomcat
+# Using default tag: latest
+# latest: Pulling from library&#x2F;tomcat
+# 0e29546d541c: Pull complete
+# 9b829c73b52b: Pull complete
+# cb5b7ae36172: Pull complete
+# 6494e4811622: Pull complete
+# 668f6fcc5fa5: Pull complete
+# dc120c3e0290: Pull complete
+# 8f7c0eebb7b1: Pull complete
+# 77b694f83996: Pull complete
+# 0f611256ec3a: Pull complete
+# 4f25def12f23: Pull complete
+# Digest: sha256:9dee185c3b161cdfede1f5e35e8b56ebc9de88ed3a79526939701f3537a52324
+# Status: Downloaded newer image for tomcat:latest
+# docker.io&#x2F;library&#x2F;tomcat:latest
+
+[lixun@aliecs docker]$ docker run -d --name tomcat -p 6201:8080 tomcat
+# cb14f941e36d8f99915c61da2280d9c7afa79b61b8bd5a05946e2a9311236202
+
+# 测试发现 404
+[lixun@aliecs docker]$ curl localhost:6201
+# &lt;!doctype html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;HTTP Status 404 – Not Found&lt;&#x2F;title&gt;&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;body &#123;font-family:Tahoma,Arial,sans-serif;&#125; h1, h2, h3, b &#123;color:white;background-color:#525D76;&#125; h1 &#123;font-size:22px;&#125; h2 &#123;font-size:16px;&#125; h3 &#123;font-size:14px;&#125; p &#123;font-size:12px;&#125; a &#123;color:black;&#125; .line &#123;height:1px;background-color:#525D76;border:none;&#125;&lt;&#x2F;style&gt;&lt;&#x2F;head&gt;&lt;body&gt;&lt;h1&gt;HTTP Status 404 – Not Found&lt;&#x2F;h1&gt;&lt;hr class&#x3D;&quot;line&quot; &#x2F;&gt;&lt;p&gt;&lt;b&gt;Type&lt;&#x2F;b&gt; Status Report&lt;&#x2F;p&gt;&lt;p&gt;&lt;b&gt;Description&lt;&#x2F;b&gt; The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.&lt;&#x2F;p&gt;&lt;hr class&#x3D;&quot;line&quot; &#x2F;&gt;&lt;h3&gt;Apache Tomcat&#x2F;10.0.14&lt;&#x2F;h3&gt;&lt;&#x2F;body&gt;&lt;&#x2F;html&gt;
+
+# 查看 tomcat 文件
+[lixun@aliecs docker]$ docker exec -it tomcat &#x2F;bin&#x2F;bash
+root@cb14f941e36d:&#x2F;usr&#x2F;local&#x2F;tomcat# ls
+# BUILDING.txt     LICENSE  README.md      RUNNING.txt  conf  logs            temp     webapps.dist
+# CONTRIBUTING.md  NOTICE   RELEASE-NOTES  bin          lib   native-jni-lib  webapps  work
+root@cb14f941e36d:&#x2F;usr&#x2F;local&#x2F;tomcat# ls webapps -l
+total 0
+
+# 将 webapps.dist 复制到 webapps 下即可
+root@cb14f941e36d:&#x2F;usr&#x2F;local&#x2F;tomcat&#x2F;# cp -r webapps.dist&#x2F;* webapps
+
+[lixun@aliecs docker]$ curl localhost:6201
+
+
+
+# &lt;!DOCTYPE html&gt;
+# &lt;html lang&#x3D;&quot;en&quot;&gt;
+#     &lt;head&gt;
+#         &lt;meta charset&#x3D;&quot;UTF-8&quot; &#x2F;&gt;
+#         &lt;title&gt;Apache Tomcat&#x2F;10.0.14&lt;&#x2F;title&gt;
+#         &lt;link href&#x3D;&quot;favicon.ico&quot; rel&#x3D;&quot;icon&quot; type&#x3D;&quot;image&#x2F;x-icon&quot; &#x2F;&gt;
+#         &lt;link href&#x3D;&quot;tomcat.css&quot; rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; &#x2F;&gt;
+#     &lt;&#x2F;head&gt;
+
+#     &lt;body&gt;
+#         &lt;div id&#x3D;&quot;wrapper&quot;&gt;
+#             &lt;div id&#x3D;&quot;navigation&quot; class&#x3D;&quot;curved container&quot;&gt;
+#                 &lt;span id&#x3D;&quot;nav-home&quot;&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;&quot;&gt;Home&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-hosts&quot;&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;&quot;&gt;Documentation&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-config&quot;&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;config&#x2F;&quot;&gt;Configuration&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-examples&quot;&gt;&lt;a href&#x3D;&quot;&#x2F;examples&#x2F;&quot;&gt;Examples&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-wiki&quot;&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;wiki.apache.org&#x2F;tomcat&#x2F;FrontPage&quot;&gt;Wiki&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-lists&quot;&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html&quot;&gt;Mailing Lists&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;span id&#x3D;&quot;nav-help&quot;&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;findhelp.html&quot;&gt;Find Help&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;
+#                 &lt;br class&#x3D;&quot;separator&quot; &#x2F;&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;div id&#x3D;&quot;asf-box&quot;&gt;
+#                 &lt;h1&gt;Apache Tomcat&#x2F;10.0.14&lt;&#x2F;h1&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;div id&#x3D;&quot;upper&quot; class&#x3D;&quot;curved container&quot;&gt;
+#                 &lt;div id&#x3D;&quot;congrats&quot; class&#x3D;&quot;curved container&quot;&gt;
+#                     &lt;h2&gt;If you&#39;re seeing this, you&#39;ve successfully installed Tomcat. Congratulations!&lt;&#x2F;h2&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div id&#x3D;&quot;notice&quot;&gt;
+#                     &lt;img id&#x3D;&quot;tomcat-logo&quot; src&#x3D;&quot;tomcat.svg&quot; alt&#x3D;&quot;[tomcat logo]&quot; &#x2F;&gt;
+#                     &lt;div id&#x3D;&quot;tasks&quot;&gt;
+#                         &lt;h3&gt;Recommended Reading:&lt;&#x2F;h3&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;security-howto.html&quot;&gt;Security Considerations How-To&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;manager-howto.html&quot;&gt;Manager Application How-To&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;cluster-howto.html&quot;&gt;Clustering&#x2F;Session Replication How-To&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div id&#x3D;&quot;actions&quot;&gt;
+#                     &lt;div class&#x3D;&quot;button&quot;&gt;
+#                         &lt;a class&#x3D;&quot;container shadow&quot; href&#x3D;&quot;&#x2F;manager&#x2F;status&quot;&gt;&lt;span&gt;Server Status&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+#                     &lt;&#x2F;div&gt;
+#                     &lt;div class&#x3D;&quot;button&quot;&gt;
+#                         &lt;a class&#x3D;&quot;container shadow&quot; href&#x3D;&quot;&#x2F;manager&#x2F;html&quot;&gt;&lt;span&gt;Manager App&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+#                     &lt;&#x2F;div&gt;
+#                     &lt;div class&#x3D;&quot;button&quot;&gt;
+#                         &lt;a class&#x3D;&quot;container shadow&quot; href&#x3D;&quot;&#x2F;host-manager&#x2F;html&quot;&gt;&lt;span&gt;Host Manager&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;br class&#x3D;&quot;separator&quot; &#x2F;&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;div id&#x3D;&quot;middle&quot; class&#x3D;&quot;curved container&quot;&gt;
+#                 &lt;h3&gt;Developer Quick Start&lt;&#x2F;h3&gt;
+#                 &lt;div class&#x3D;&quot;col25&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;setup.html&quot;&gt;Tomcat Setup&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;appdev&#x2F;&quot;&gt;First Web Application&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col25&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;realm-howto.html&quot;&gt;Realms &amp; AAA&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;jndi-datasource-examples-howto.html&quot;&gt;JDBC DataSources&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col25&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;&#x2F;examples&#x2F;&quot;&gt;Examples&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col25&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;wiki.apache.org&#x2F;tomcat&#x2F;Specifications&quot;&gt;Servlet Specifications&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                         &lt;p&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;wiki.apache.org&#x2F;tomcat&#x2F;TomcatVersions&quot;&gt;Tomcat Versions&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;br class&#x3D;&quot;separator&quot; &#x2F;&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;div id&#x3D;&quot;lower&quot;&gt;
+#                 &lt;div id&#x3D;&quot;low-manage&quot; class&#x3D;&quot;&quot;&gt;
+#                     &lt;div class&#x3D;&quot;curved container&quot;&gt;
+#                         &lt;h3&gt;Managing Tomcat&lt;&#x2F;h3&gt;
+#                         &lt;p&gt;For security, access to the &lt;a href&#x3D;&quot;&#x2F;manager&#x2F;html&quot;&gt;manager webapp&lt;&#x2F;a&gt; is restricted.
+#                         Users are defined in:&lt;&#x2F;p&gt;
+#                         &lt;pre&gt;$CATALINA_HOME&#x2F;conf&#x2F;tomcat-users.xml&lt;&#x2F;pre&gt;
+#                         &lt;p&gt;In Tomcat 10.0 access to the manager application is split between
+#                            different users. &amp;nbsp; &lt;a href&#x3D;&quot;&#x2F;docs&#x2F;manager-howto.html&quot;&gt;Read more...&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+#                         &lt;br &#x2F;&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;RELEASE-NOTES.txt&quot;&gt;Release Notes&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;changelog.html&quot;&gt;Changelog&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;migration.html&quot;&gt;Migration Guide&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;security.html&quot;&gt;Security Notices&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div id&#x3D;&quot;low-docs&quot; class&#x3D;&quot;&quot;&gt;
+#                     &lt;div class&#x3D;&quot;curved container&quot;&gt;
+#                         &lt;h3&gt;Documentation&lt;&#x2F;h3&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;&quot;&gt;Tomcat 10.0 Documentation&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;config&#x2F;&quot;&gt;Tomcat 10.0 Configuration&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;wiki.apache.org&#x2F;tomcat&#x2F;FrontPage&quot;&gt;Tomcat Wiki&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;p&gt;Find additional important configuration information in:&lt;&#x2F;p&gt;
+#                         &lt;pre&gt;$CATALINA_HOME&#x2F;RUNNING.txt&lt;&#x2F;pre&gt;
+#                         &lt;p&gt;Developers may be interested in:&lt;&#x2F;p&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;bugreport.html&quot;&gt;Tomcat 10.0 Bug Database&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;api&#x2F;index.html&quot;&gt;Tomcat 10.0 JavaDocs&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;github.com&#x2F;apache&#x2F;tomcat&#x2F;tree&#x2F;10.0.x&quot;&gt;Tomcat 10.0 Git Repository at GitHub&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div id&#x3D;&quot;low-help&quot; class&#x3D;&quot;&quot;&gt;
+#                     &lt;div class&#x3D;&quot;curved container&quot;&gt;
+#                         &lt;h3&gt;Getting Help&lt;&#x2F;h3&gt;
+#                         &lt;h4&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;faq&#x2F;&quot;&gt;FAQ&lt;&#x2F;a&gt; and &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html&quot;&gt;Mailing Lists&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+#                         &lt;p&gt;The following mailing lists are available:&lt;&#x2F;p&gt;
+#                         &lt;ul&gt;
+#                             &lt;li id&#x3D;&quot;list-announce&quot;&gt;&lt;strong&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html#tomcat-announce&quot;&gt;tomcat-announce&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+#                                 Important announcements, releases, security vulnerability notifications. (Low volume).&lt;&#x2F;strong&gt;
+#                             &lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html#tomcat-users&quot;&gt;tomcat-users&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+#                                 User support and discussion
+#                             &lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html#taglibs-user&quot;&gt;taglibs-user&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+#                                 User support and discussion for &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;taglibs&#x2F;&quot;&gt;Apache Taglibs&lt;&#x2F;a&gt;
+#                             &lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html#tomcat-dev&quot;&gt;tomcat-dev&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+#                                 Development mailing list, including commit messages
+#                             &lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;br class&#x3D;&quot;separator&quot; &#x2F;&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;div id&#x3D;&quot;footer&quot; class&#x3D;&quot;curved container&quot;&gt;
+#                 &lt;div class&#x3D;&quot;col20&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;h4&gt;Other Downloads&lt;&#x2F;h4&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;download-connectors.cgi&quot;&gt;Tomcat Connectors&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;download-native.cgi&quot;&gt;Tomcat Native&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;taglibs&#x2F;&quot;&gt;Taglibs&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;deployer-howto.html&quot;&gt;Deployer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col20&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;h4&gt;Other Documentation&lt;&#x2F;h4&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;connectors-doc&#x2F;&quot;&gt;Tomcat Connectors&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;connectors-doc&#x2F;&quot;&gt;mod_jk Documentation&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;native-doc&#x2F;&quot;&gt;Tomcat Native&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;&#x2F;docs&#x2F;deployer-howto.html&quot;&gt;Deployer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col20&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;h4&gt;Get Involved&lt;&#x2F;h4&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;getinvolved.html&quot;&gt;Overview&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;source.html&quot;&gt;Source Repositories&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;lists.html&quot;&gt;Mailing Lists&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;wiki.apache.org&#x2F;tomcat&#x2F;FrontPage&quot;&gt;Wiki&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col20&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;h4&gt;Miscellaneous&lt;&#x2F;h4&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;contact.html&quot;&gt;Contact&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;legal.html&quot;&gt;Legal&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.apache.org&#x2F;foundation&#x2F;sponsorship.html&quot;&gt;Sponsorship&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.apache.org&#x2F;foundation&#x2F;thanks.html&quot;&gt;Thanks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;div class&#x3D;&quot;col20&quot;&gt;
+#                     &lt;div class&#x3D;&quot;container&quot;&gt;
+#                         &lt;h4&gt;Apache Software Foundation&lt;&#x2F;h4&gt;
+#                         &lt;ul&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;whoweare.html&quot;&gt;Who We Are&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;heritage.html&quot;&gt;Heritage&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.apache.org&quot;&gt;Apache Home&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                             &lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;tomcat.apache.org&#x2F;resources.html&quot;&gt;Resources&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+#                         &lt;&#x2F;ul&gt;
+#                     &lt;&#x2F;div&gt;
+#                 &lt;&#x2F;div&gt;
+#                 &lt;br class&#x3D;&quot;separator&quot; &#x2F;&gt;
+#             &lt;&#x2F;div&gt;
+#             &lt;p class&#x3D;&quot;copyright&quot;&gt;Copyright &amp;copy;1999-2022 Apache Software Foundation.  All Rights Reserved&lt;&#x2F;p&gt;
+#         &lt;&#x2F;div&gt;
+#     &lt;&#x2F;body&gt;
+
+# &lt;&#x2F;html&gt;</code></pre>
+
+<h2 id="可视化-portainer-ce"><a href="#可视化-portainer-ce" class="headerlink" title="可视化 portainer-ce"></a>可视化 portainer-ce</h2><pre class="language-shell" data-language="shell"><code class="language-shell"># 1.docker search
+[lixun@aliecs ~]$ docker search portainer -f stars&#x3D;1000
+# NAME                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+# portainer&#x2F;portainer      This Repo is now deprecated, use portainer&#x2F;p…   2235
+# portainer&#x2F;portainer-ce   Portainer CE - a lightweight service deliver…   1206
+
+# 2.docker pull
+[lixun@aliecs ~]$ docker pull portainer&#x2F;portainer-ce
+# Using default tag: latest
+# latest: Pulling from portainer&#x2F;portainer-ce
+# 0ea73420e2bb: Pull complete
+# c367f59be2e1: Pull complete
+# b71b88d796e2: Pull complete
+# Digest: sha256:4f126c5114b63e9d1bceb4b368944d14323329a9a0d4e7bb7eb53c9b7435d498
+# Status: Downloaded newer image for portainer&#x2F;portainer-ce:latest
+# docker.io&#x2F;portainer&#x2F;portainer-ce:latest
+
+# 3.docker run
+[lixun@aliecs &#x2F;]$ docker run -d -p 6211:8000 -p 6212:9443 --name portainer --restart&#x3D;always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v portainer_data:&#x2F;data portainer&#x2F;portainer-ce
+# 499b255f0e3673c0bef1fd3311df8742a2919236278cc7692af2933e98ad595a
+[lixun@aliecs &#x2F;]$ docker ps
+# CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                                                                                            NAMES
+# 499b255f0e36   portainer&#x2F;portainer-ce   &quot;&#x2F;portainer&quot;             5 seconds ago   Up 4 seconds   9000&#x2F;tcp, 0.0.0.0:6211-&gt;8000&#x2F;tcp, :::6211-&gt;8000&#x2F;tcp, 0.0.0.0:6212-&gt;9443&#x2F;tcp, :::6212-&gt;9443&#x2F;tcp   portainer</code></pre>
+
+<p><a href="/images/docker/portainer.png"><img src='/images/docker/portainer.png' /></a></p>
+<h2 id="Docker-镜像"><a href="#Docker-镜像" class="headerlink" title="Docker 镜像"></a>Docker 镜像</h2><h3 id="镜像是什么"><a href="#镜像是什么" class="headerlink" title="镜像是什么"></a>镜像是什么</h3><p>镜像是一种轻量级、可执行的独立软件包，用来打包软件运行环境和基于运行环境开发的软件，它包含运行某个软件所需的所有内容，包括代码、运行时、库、环境变量和配置文件。<br>所有的应用，直接打包 docker 镜像，就可以直接跑起来！<br>如何得到镜像：</p>
+<ul>
+<li>Docker Hub 下载</li>
+<li>DockerFile 制作</li>
+</ul>
+<h3 id="Docker-镜像加载原理"><a href="#Docker-镜像加载原理" class="headerlink" title="Docker 镜像加载原理"></a>Docker 镜像加载原理</h3><blockquote>
+<p>UnionFS(联合文件系统)</p>
+</blockquote>
+<p>联合文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。联合文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。<br>特性：一次同时加载多个文件系统，但从外面看起来只能看到一个文件系统。联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录。</p>
+<blockquote>
+<p>Docker 镜像加载原理</p>
+</blockquote>
+<p>Docker 的镜像实际由一层一层的文件系统组成：</p>
+<ul>
+<li>bootfs（boot file system）主要包含 bootloader 和 kernel。bootloader 主要是引导加载 kernel，完成后整个内核就都在内存中了。此时内存的使用权已由 bootfs 转交给内核，系统卸载 bootfs。可以被不同的 Linux 发行版公用。</li>
+<li>rootfs（root file system），包含典型 Linux 系统中的/dev，/proc，/bin，/etc 等标准目录和文件。rootfs 就是各种不同操作系统发行版（Ubuntu，Centos 等）。因为底层直接用 Host 的 kernel，rootfs 只包含最基本的命令，工具和程序就可以了。</li>
+<li>分层理解<br>所有的 Docker 镜像都起始于一个基础镜像层，当进行修改或增加新的内容时，就会在当前镜像层之上，创建新的容器层。<br>容器在启动时会在镜像最外层上建立一层可读写的容器层（R/W），而镜像层是只读的（R/O）。</li>
+</ul>
+<p><a href="/images/docker/layer.webp"><img src='/images/docker/layer.webp' /></a></p>
+<h2 id="提交镜像"><a href="#提交镜像" class="headerlink" title="提交镜像"></a>提交镜像</h2><pre class="language-shell" data-language="shell"><code class="language-shell">[lixun@aliecs ~]$ docker run -d -p 6201:8080 --name tomcat tomcat
+# 05b29d1bcc58702cfa3c7e8421a3254fbcc83bd2d9358af12faf3b54feb02cf1
+
+[lixun@aliecs ~]$ docker exec -it tomcat &#x2F;bin&#x2F;bash
+root@05b29d1bcc58:&#x2F;usr&#x2F;local&#x2F;tomcat# ls
+# BUILDING.txt     LICENSE  README.md      RUNNING.txt  conf  logs            temp     work
+# CONTRIBUTING.md  NOTICE   RELEASE-NOTES  bin          lib   native-jni-lib  webapps.dist
+root@05b29d1bcc58:&#x2F;usr&#x2F;local&#x2F;tomcat# mv webapps.dist webapps
+root@05b29d1bcc58:&#x2F;usr&#x2F;local&#x2F;tomcat# ls
+# BUILDING.txt     LICENSE  README.md      RUNNING.txt  conf  logs            temp     work
+# CONTRIBUTING.md  NOTICE   RELEASE-NOTES  bin          lib   native-jni-lib  webapps
+
+[lixun@aliecs ~]$ docker ps
+# CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                                                                            NAMES
+# cb14f941e36d   tomcat                   &quot;catalina.sh run&quot;        5 hours ago      Up 3 minutes    0.0.0.0:6201-&gt;8080&#x2F;tcp, :::6201-&gt;8080&#x2F;tcp
+
+[lixun@aliecs ~]$ docker commit -a &quot;lixun&quot; -m &quot;webapps.dist renamed webapps&quot; 05b29d1bcc58 my_tomcat:1.0
+# sha256:cc55275594cde1deb6b455ee4da60a6d2b1ffae3116fac51edf49cefdd0ec5c0
+
+[lixun@aliecs ~]$ docker images
+# REPOSITORY               TAG       IMAGE ID       CREATED          SIZE
+# my_tomcat                1.0       cc55275594cd   20 seconds ago   684MB
+# tomcat                   latest    fb5657adc892   6 months ago     680MB</code></pre>
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E8%AF%BE%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下27课文</a>
         </h2>
 
         <div class="post-meta-container">
@@ -266,14 +1397,14 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2022-04-04 14:24:39" itemprop="dateCreated datePublished" datetime="2022-04-04T14:24:39+09:00">2022-04-04</time>
+      <time title="作成日：2022-05-08 21:39:37" itemprop="dateCreated datePublished" datetime="2022-05-08T21:39:37+09:00">2022-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+      <time title="修正日：2022-06-27 10:31:24" itemprop="dateModified" datetime="2022-06-27T10:31:24+09:00">2022-06-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,7 +1423,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>1.2k</span>
+      <span>976</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
@@ -310,16 +1441,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="21-中国茶の歴史"><a href="#21-中国茶の歴史" class="headerlink" title="21 中国茶の歴史"></a>21 中国茶の歴史</h1><h2 id="中国茶の歴史"><a href="#中国茶の歴史" class="headerlink" title="中国茶の歴史"></a>中国茶の歴史</h2><article>
-    <div style='text-indent:2em;'>中国茶はもともと薬として使われていた。疲れを取ったり、気分をすっきりさせたりする効用があるとされ、リューマチの痛みを和らげる塗り薬としても高く評価されていた。嗜好品として飲まれるようになったのは３世紀以降である。唐の時代になると広く栽培されるようなり、生産量が飛躍的に増加した。現在中国の茶の生産量は、世界の３分の１近くを占めている。</div>
-    <div style='text-indent:2em;'>中国茶は、発酵の進み方によって香りや色や異なり、緑茶、紅茶、ウーロン茶などいくつかの種類に分けられる。全てのお茶のもとといわれているのが緑茶で、現在では中国各地でその土地独自の品種が育っている。</div>
-    <div style='text-indent:2em;'>ジャスミン茶は茶に花の香りをつけた「花茶」の代表である。ジャスミンのほかに、キンモクセイの香りをつけた茶もある。ウーロン茶は福建省が産地として知られている。日本で中国茶として最も有名なのがウーロン茶で、よく飲まれているが、独特な香りが特徴で、体内の脂肪を流す効果がある。また血液中のコレステロールを減らして血液の循環を良くするともいわれている。</div>
-    <div style='text-indent:2em;'>日本をはじめヨーロッパ、中東に至るまで、茶はすべて中国から伝えられた。中国茶は、すべての茶のルーツだといっても過言ではない。「茶」という言葉の音がそれを示している。日本語では「茶」を中国と同じ「チャ」と発音する。この「チャ」は、ほかにも、ヒンディー語、アラビア語、トルコ語、ロシア語、ポルトガル語などに入った。福建地方で話される福建語の「テ」はオランダ語、ドイツ語、英語、フランス語などの言語に入って、「ティ」あるいは「テ」となった。</div>
-    <div style='text-indent:2em;'>ところで、日本に茶が伝わったのは８世紀ごろといわれるが、そのころはもっぱら薬として用いられた。本格的に飲まれるようになったのは、12世紀末のことである。</div>
+          <h1 id="27-桜"><a href="#27-桜" class="headerlink" title="27 桜"></a>27 桜</h1><h2 id="桜"><a href="#桜" class="headerlink" title="桜"></a>桜</h2><article>
+    真剣！開花予想
+    <div style='text-indent:2em;'>
+　　今年も桜の開花予報に気をもむ季節がやってきた。毎年３月に発表される桜の開花予想。気象庁ではスーパーコンピューターを更新し、万全の体制で臨む。
+    </div>
+    気象庁、スーパーコンピューターを導入
+    <div style='text-indent:2em;'>
+　　気象庁では96年からコンピューターを使って桜の開花予想をしている。過去の開花日や気温のデータから予測式を作り、その予測式に夏以降から発表日までの気温と、発表日以降の予想気温を当てはめ、開花予想日を導き出す。これまでは、過去50年の開花状況をもとにしていたが、今年は地球温暖化や都市化の影響を考え、現状に近い過去30年間からデータを選んだという。
+　　今年は寒波の影響で開花が遅れる見込みだ。昨年は開花が予想より４日以上遅れ、苦情が相次いだ。果たして、今年はどうなるか。
+    </div>
+    コラム　日本人と桜
+    <div style='text-indent:2em;'>
+　　日本人で桜に無関心な人はいるまい。開花宣言だ、２分咲きだと情報が飛び交う。開花すれば、雨が心配だ、風が心配だと、気にするまいと思っても、気にせずにはいられない。桜が咲けば「花見」が始まる。職場の仲間や友達、家族と花を楽しみながら、酒を飲んだり弁当を食べたりする。花のみならず、桜の木は日本人の生活に密着している。花の塩漬けは、祝いの時の桜茶になり、あんパンの上に乗っている。葉の塩漬けは桜餅を包むのに使う。木材は木工材料から建築用材にまで使われている。樹皮は茶筒や工芸品に利用する。
+　　中国の北京でも天壇公園や玉淵潭公園では、日本から寄贈された桜を見ることができる。ちなみに、北京の桜は東京よりも３週間ほど開花が遅いそうだ。
+    </div>
 </article>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E8%AF%BE%E6%96%87/#more" rel="contents">
+              <a class="btn" href="/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E8%AF%BE%E6%96%87/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -352,7 +1492,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E4%BC%9A%E8%AF%9D/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E4%BC%9A%E8%AF%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -365,7 +1505,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E4%BC%9A%E8%AF%9D/" class="post-title-link" itemprop="url">新标日中下21会话</a>
+          <a href="/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E4%BC%9A%E8%AF%9D/" class="post-title-link" itemprop="url">新标日中下27会话</a>
         </h2>
 
         <div class="post-meta-container">
@@ -376,14 +1516,14 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2022-04-04 14:22:46" itemprop="dateCreated datePublished" datetime="2022-04-04T14:22:46+09:00">2022-04-04</time>
+      <time title="作成日：2022-05-08 21:37:55" itemprop="dateCreated datePublished" datetime="2022-05-08T21:37:55+09:00">2022-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+      <time title="修正日：2022-06-27 00:31:58" itemprop="dateModified" datetime="2022-06-27T00:31:58+09:00">2022-06-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -402,14 +1542,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>3.3k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>6 分</span>
+      <span>4 分</span>
     </span>
 </div>
 
@@ -420,11 +1560,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="21-広州で"><a href="#21-広州で" class="headerlink" title="21 広州で"></a>21 広州で</h1><h2 id="広州で"><a href="#広州で" class="headerlink" title="広州で"></a>広州で</h2><p>店員：お客様、どんなお茶をお探しですか。よかったら、試飲なさいませんか。<br>大山：わあ、驚いた。日本語がぺらぺらなんですね。<br>店員：広州には日系企業も多いですし、日本人の観光客も大勢いらっしゃいます。ですから、わたしも独学で日本語を勉強しました。<br>大山：なるほど。本当に中国の人は勉強熱心だなあ。<br>店員：ありがとうございます。それで、どんなお茶を探してですか。<br>大山：じゃあ、おすすめのお茶をいくつか飲ませてくれますか。<br>店員：かしこまりました。少々お待ちください。</p>
-<p>店員：雲南省のプーアル茶をお試ください。15 年熟成させたものですから、味に深みもありますし、独特の香りがあります。おすすめですよ。<br>大山：あっ、本当だ。確かに深い味わいですね。おいくらですか。<br>店員：１斤、500g で 250 元です。<br>大山：うーん、けっこういい値段ですねえ。<br>店員：こちらは 15 年物の特級品ですから、その分どうしてもお値段が高くなるんです。<br>大山：…じゃあ、最初に飲んだウーロン茶と、このプーアル茶を 350g ずつください。<br>店員：かしこまりました。えー、合わせて 300 元になります。<br>大山：300 元…。もう少し安くなりませんか。全部で 250 元でどうです。<br>店員：お客様、全部で 250 元っていうのはちょっと…。280 元でどうでしょう。おまけとして、このティーパックをサービスします。<br>大山：本当？じゃあ、それでお願いします。<br>店員：ありがとうございます。今ご用意いたしますので、少々お待ちください。</p>
+          <h1 id="27-イベント当日"><a href="#27-イベント当日" class="headerlink" title="27 イベント当日"></a>27 イベント当日</h1><h2 id="イベント当日"><a href="#イベント当日" class="headerlink" title="イベント当日"></a>イベント当日</h2><p>アナウンサー：日本ではこれから桜の季節を迎えますが、ここ上海も春を迎えています。現在、酒造会社の竜虎酒造が主催する「日本酒『金星』に会う創作中華料理」というコンテストが行われています。会場には桜の木が飾られ、日本的な雰囲気です。それでは、竜虎酒造の担当者である佐藤さんにお話を伺います。大変盛況ですね。<br>佐藤：私たちも正直、コンテストにこれほどの応募があるとは思っていませんでした。<br>アナウンサー：中国国内で「金星」が販売されて、ちょうど１年と聞きましたが、売れ行きのほうはいかがですか。<br>佐藤：中国国内では、これまでに 50 万本の売り上げがありました。当初は、北京・上海などんお都市部が中心でしたが、今では、各地の大型デパート、スーパーマーケットなどにも出荷しています。<br>アナウンサー：「金星」がこれだけ中国の市場に受け入れられた理由は何だとお考えですが。<br>佐藤：日本人の感覚でものを見るのではなく、中国人の感覚になってものを見ようと考えたことが、ポイントではないかと思います。<br>アナウンサー：中国人の感覚になるというと。<br>佐藤：幸いなことに、今回、優れた中国人スタッフとチームを組むことが出来ました。彼らの意見を積極的に受け入れることで、中国人から見た日本酒のイメージを大切にできました。今回の成功は、彼らの協力なしにはありえなかったと思います。<br>アナウンサー：そうですか。たしか、この会場にも来られていると聞きましたが…。<br>佐藤：ええ。広告を担当してくれた JC 企画の李秀麗さんです。<br>アナウンサー：では、李秀麗さんにお話をお聞きしたいと思います。李さん、最初の質問ですが…。<br>アナウンサー：キャー！どうしましょう。<br>佐藤：すごい熱だ。誰か！救急車！救急車を読んでください。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/04/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B21%E4%BC%9A%E8%AF%9D/#more" rel="contents">
+              <a class="btn" href="/2022/05/08/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B27%E4%BC%9A%E8%AF%9D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -457,7 +1596,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/11/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B28%E8%AF%BE%E6%96%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -470,7 +1609,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">新标日中下20综合练习</a>
+          <a href="/2022/04/11/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B28%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下28课文</a>
         </h2>
 
         <div class="post-meta-container">
@@ -480,15 +1619,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">投稿日</span>
+      
 
-      <time title="作成日：2022-04-02 10:46:04" itemprop="dateCreated datePublished" datetime="2022-04-02T10:46:04+09:00">2022-04-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+      <time title="作成日：2022-04-11 16:17:54 / 修正日：19:16:02" itemprop="dateCreated datePublished" datetime="2022-04-11T16:17:54+09:00">2022-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,7 +1640,108 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>1.8k</span>
+      <span>10</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>1 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="28-ロボット"><a href="#28-ロボット" class="headerlink" title="28 ロボット"></a>28 ロボット</h1><h2 id="ロボット"><a href="#ロボット" class="headerlink" title="ロボット"></a>ロボット</h2><article>
+    <div style='text-indent:2em;'></div>
+    <div style='text-indent:2em;'></div>
+    <div style='text-indent:2em;'></div>
+</article>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/11/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B28%E4%BC%9A%E8%AF%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/11/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B28%E4%BC%9A%E8%AF%9D/" class="post-title-link" itemprop="url">新标日中下28会话</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2022-04-11 16:17:45" itemprop="dateCreated datePublished" datetime="2022-04-11T16:17:45+09:00">2022-04-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-06-26 22:57:09" itemprop="dateModified" datetime="2022-06-26T22:57:09+09:00">2022-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
@@ -525,45 +1759,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h1><h2 id="1-在-里填写适当的助词"><a href="#1-在-里填写适当的助词" class="headerlink" title="1.在()里填写适当的助词"></a>1.在()里填写适当的助词</h2><ul>
-<li>1).高齢者(に)向いた健康法だ。</li>
-<li>2).これまでの努力が実(を)結び、上海に事務所を開くことができた。</li>
-<li>3).これからも太極拳(で)日中の交流を広げたい。</li>
-<li>4).65 歳以上の高齢者が町の人口の３分の１(を)占めている。</li>
-<li>5).優勝するためには、チーム全員が心(を)１つにしなければならない。</li>
-</ul>
-<mark class="label ">に　を　で　を　を</mark>
-
-<h2 id="2-选择正确的读音"><a href="#2-选择正确的读音" class="headerlink" title="2.选择正确的读音"></a>2.选择正确的读音</h2><p>1)戦う(あらそう・せんそう・おそう・<u>たたかう</u>)<br>2)普及(<u>ふきゅう</u>・ふっきゅう・ふつう・しんきゅう)<br>3)占める(とめる・<u>しめる</u>・せんめる・うらめる)<br>4)制定(せいじょう・せいさだ・せんてい・<u>せいてい</u>)<br>5)負担(ぶうたん・ふだん・<u>ふたん</u>・おうたん)<br>6)訪れる(<u>おとずれる</u>・とれる・たずれる・ほうれる)</p>
-<h2 id="3-阅读课文，回答问题"><a href="#3-阅读课文，回答问题" class="headerlink" title="3.阅读课文，回答问题"></a>3.阅读课文，回答问题</h2><ul>
-<li>1)太極拳が体の小さい人や、力の弱い人にも向く健康法だといわれる理由は何ですか。<ul>
-<li>だれもが持っている体のエネルギー、つまり「気」で戦う拳法だからです。</li>
-</ul>
-</li>
-<li>2)「簡化 24 式太極拳」は拳法ですか。<ul>
-<li>拳法というよりもむしろ健康のための体操です。</li>
-</ul>
-</li>
-<li>3)「簡化 24 式太極拳」にはどんな効果がありますか。<ul>
-<li>血液の循環をよくし、内臓の機能を高める。肩こり、腰痛など、体の不調ばかりでなく、ストレスを解消する効果があります。</li>
-</ul>
-</li>
-<li>4)太極拳の効用として健康以外にどんなことがありますか。<ul>
-<li>中国と日本のつながりを強める役目も果たしています。</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-从-▭-中选出合适的词语填入-里"><a href="#4-从-▭-中选出合适的词语填入-里" class="headerlink" title="4.从 ▭ 中选出合适的词语填入()里"></a>4.从 ▭ 中选出合适的词语填入()里</h2><ul>
-<li>1)オリンピックに出るという年長の夢を(果たす)ことができた。</li>
-<li>2)その学者が事件に(関わった)という証拠はない。</li>
-<li>3)厚かった夏も台風を(境に)急に涼しくなった。</li>
-<li>4)女性にも一人暮らしの人にも(向いた)おいしいスープの店ができた。</li>
-<li>5)田中さんは健康法の１つとしてジョギングとカラオケを(趣味にしている)</li>
-</ul>
-<p><code>境に 向いた 関わった 果たす 趣味にしている</code></p>
+          <h1 id="28-病院"><a href="#28-病院" class="headerlink" title="28 病院"></a>28 病院</h1><h2 id="病院"><a href="#病院" class="headerlink" title="病院"></a>病院</h2><p>李：あら、佐藤さん。わざわざ来てくださったんですか。<br>佐藤：いや、近くに来る用があったもんで、ついでに寄ったんです。どうですか、具合は。<br>李：ええ、おかげさまでだいぶよくなりました。本当に、ご迷惑をかけて申し訳ありません。わたしのせいで、コンテストが台無しになってしまったんじゃないですか。<br>佐藤：とんでもない。。コンテストは大成功のうちに終わりました。<br>李：だったらいいんですが。<br>佐藤：健康第一です。十分休んでください。回復するまで、どのくらいかかりそうですか。<br>李：あと１週間ぐらいで退院できるそうです。わたし、病気なんてしたことがなかったから、本当にびっくりしちゃって…。健康だけには自信があったのに…。<br>佐藤：元気を出してください。いつか、何度失敗してもくじけないって勇気づけくれたのは李さんだったでしょう。<br>李：確かにそうですね。<br>佐藤：とにかく、今はゆっくり休んでください。あっ、これ。忘れるところでした。こんなものしか持ってこられなくて、すみません。<br>李：そんなこと言わないでください。うれしいです。ありがとうございます。<br>佐藤：何か欲しいものがあったら、遠慮らく言ってください。明日来るときに持ってきますから。<br>李：明日も近くに来る用があるんですか？</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/#more" rel="contents">
+              <a class="btn" href="/2022/04/11/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B28%E4%BC%9A%E8%AF%9D/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -596,7 +1795,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E8%AF%BE%E6%96%87/">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/09/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B26%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -609,7 +1808,88 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下20课文</a>
+          <a href="/2022/04/09/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B26%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">新标日中下26综合练习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+      
+
+      <time title="作成日：2022-04-09 11:55:22 / 修正日：23:55:32" itemprop="dateCreated datePublished" datetime="2022-04-09T11:55:22+09:00">2022-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>0</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>1 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/09/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B26%E8%AF%BE%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/09/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B26%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下26课文</a>
         </h2>
 
         <div class="post-meta-container">
@@ -620,14 +1900,14 @@
       </span>
       <span class="post-meta-item-text">投稿日</span>
 
-      <time title="作成日：2022-04-02 10:45:46" itemprop="dateCreated datePublished" datetime="2022-04-02T10:45:46+09:00">2022-04-02</time>
+      <time title="作成日：2022-04-09 11:54:57" itemprop="dateCreated datePublished" datetime="2022-04-09T11:54:57+09:00">2022-04-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+      <time title="修正日：2022-04-13 13:16:21" itemprop="dateModified" datetime="2022-04-13T13:16:21+09:00">2022-04-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -646,14 +1926,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">単語数：</span>
-      <span>3.9k</span>
+      <span>2.4k</span>
     </span>
     <span class="post-meta-item" title="読書の時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>7 分</span>
+      <span>4 分</span>
     </span>
 </div>
 
@@ -664,365 +1944,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="20-太極拳で広がる交流"><a href="#20-太極拳で広がる交流" class="headerlink" title="20 太極拳で広がる交流"></a>20 太極拳で広がる交流</h1><h2 id="太極拳で広がる交流"><a href="#太極拳で広がる交流" class="headerlink" title="太極拳で広がる交流"></a>太極拳で広がる交流</h2><article>
-    <div style='text-indent:2em;'>太極拳は歴史と伝統のある拳法である。だれもが持っている体のエネルギー、つまり「気」で戦う拳法なので、体が小さい人や、力が弱い人にも向いた護身術だといわれている。健康法としても高く評判されていて、中国の公園や広場では太極拳をする人たちをよく見つかける。</div>
-    <div style='text-indent:2em;'>公園や広場でよく見る太極拳は、「簡化24式太極拳」と呼ばれ、元中国体育委員会が一般に広く普及させるために制定したものである。拳法というよりもむしろ健康のための体操で、血液の循環をよくし、内臓の機能を高める。肩こり、腰痛など、体の不調ばかりでなく、ストレスを解消するのにも役立つといわれている。</div>
-    <div style='text-indent:2em;'>こしした効用は世界的に認められている。アメリカやヨーロッパでも健康のために太極拳を趣味にしている人は多い。日本でも100万人以上の愛好者がいて、全国的に大きなブームになっている。「太極拳の市」として全市民で愛好している地域さえあるほどだ。日本では高齢化が進んでいるが、この市も高齢者が人工の４分の１以上を占めている。市長の提案で太極拳を推進し、市民の健康作りに役立てることにした。市は、練習所や体育館を作り、講習を行い、ラジオで毎朝35分間太極拳の音楽を放送した。そのような数々の努力が実を結び、大勢の市民が参加するようになった。実際、、太極拳を始める前よりも健康になった。という高齢者も多い。また、高齢者の医療、介護に関わる市の財政負担が軽減されると期待されている。</div>
-    <div style='text-indent:2em;'>太極拳の「効用」は単に健康の側面だけではない。中国と日本のつながりを強める役目も果たしている。多くの日本人が本場中国の太極拳を体験するため、中国を訪れている。また本家、中国からも太極拳の愛好者が日本に来るようになった。太極拳で日中の交流が広がっている。北京オリンピックを境にさらに普及し、世界が太極拳によって心を１つにする時代が来るのではないだろうか。そんな未来も夢ではないと多くの太極拳愛好者は考えている。</div>
+          <h1 id="26-地球温暖化"><a href="#26-地球温暖化" class="headerlink" title="26 地球温暖化"></a>26 地球温暖化</h1><h2 id="地球温暖化"><a href="#地球温暖化" class="headerlink" title="地球温暖化"></a>地球温暖化</h2><article>
+    <div style='text-indent:2em;'>近年、世界のあちこちで、異常気象が続いている。猛暑や豪雨、洪水、干ばつなどが起こり、台風やハリケーンもその規模と被害が拡大している。これは地球温暖化が住んでいることと関係があるといわれている。</div>
+    <div style='text-indent:2em;'>ここ100年で地球の気温は約0.6度上昇した。南極や北極、高い山などの氷が溶けて海水の量が増え、海面が上昇している。これまでの100年で10～20cm高くなったが、2100年までには、さらに最低でも9㎝、最高で88㎝高くなるだろうといわれている。海面が上昇すれば、低い土地は水につかってしまう。すでに</div>
+    <div style='text-indent:2em;'>では、なぜ地球の気温は上がっているのだろうか。地球を包む大気には、温室効果ガスが含まれていて、このガスが地球を一定の暖かさに保っている。しかし、ガスが増えすぎると、地球の気温は必要以上にあがてしまうことになる。温室効果ガスにはいろいろあるが、いちばん大きな影響を及ぼしているのが二酸化炭素である。二酸化炭素は発電や工場での生産、自動車の排気ガスなどで大量に排出される。つまり、わたしたちの生活が便利になればなるほど二酸化炭素が増えるということだ。一方、砂漠化や森林破壊によって、二酸化炭素を吸収源が激減していることも、温暖化が急速に進む要因となっている。</div>
+    <div style='text-indent:2em;'>1980年代の終わりごろから、世界中の人々が地球温暖化の問題を認識し始めた。国や企業ではさまざまな取り組みを始めた。省エネタイプのエアコンや冷蔵庫、自動車などが作られ、風力や太陽の光などを利用して二酸化炭素をほとんど出さずに電気を作る研究を進められている。また、各国の政府は植林活動を通じて、二酸化炭素を吸収する森林を増やそうとしている。</div>
+    <div style='text-indent:2em;'>このような努力にも関わらず、先進国の二酸化炭素排出量が少なかった国々でも急激に増えてきている。</div>
+    <div style='text-indent:2em;'>今、世界中の国々が協力して対策を講じなければ、ますます温暖化が進み、地球はわたしたち人類が住むことのできない星になりかねない。</div>
 </article>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E8%AF%BE%E6%96%87/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E4%BC%9A%E8%AF%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E4%BC%9A%E8%AF%9D/" class="post-title-link" itemprop="url">新标日中下20会话</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-04-02 10:44:46" itemprop="dateCreated datePublished" datetime="2022-04-02T10:44:46+09:00">2022-04-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>2.7k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>5 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="20-希望の灯"><a href="#20-希望の灯" class="headerlink" title="20 希望の灯"></a>20 希望の灯</h1><h2 id="希望の灯"><a href="#希望の灯" class="headerlink" title="希望の灯"></a>希望の灯</h2><p>李：どうしたんです。そんな沈んだ顔をして。<br>佐藤：あっ、李さん。どうしてぼくがここにいることが分かったんですか。<br>李：事務所に電話したんです。大山さんが、佐藤さんなら、外灘にいるんじゃないかって教えてくれました。<br>佐藤：それで、ここが分かったんですね。<br>李：わたしもよくここで、ぼんやり考え事をしたり、太極拳をしたりするんです。それにしても、どうしたんですか。<br>佐藤：いやあ、参りましたよ。ここのところ、失敗だらけなんです。やっと契約が取れたと思ったら、クレームが来て解約されてしまって…。<br>李：そうだったんですか…。いろんなことがあるものですよね。でも、日本語で、何度失敗してもくじけないって、そんなことわざがあるじゃないですか。<br>佐藤：「七転び八起き」ですか。<br>李：そう。今がいちばん大事な時ですよ。元気を出してください。外灘のすばらしい景色を前にしょんぼりしていたら、周りの人が変に思いますよ。せっかくいいニュースを持ってきたのに。<br>佐藤：いいニュース？<br>李：ええ、「金星」のイメージキャラクターが、張一心に決まりました。<br>佐藤：何ですって？<br>李：張一心が CM の仕事を引き受けてくれたんです。<br>佐藤：本当ですか！李さん、ありがとう。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/02/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B20%E4%BC%9A%E8%AF%9D/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">新标日中下19综合练习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-04-01 10:44:17" itemprop="dateCreated datePublished" datetime="2022-04-01T10:44:17+09:00">2022-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>2k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>3 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h1><h2 id="1-在-里填写适当的助词"><a href="#1-在-里填写适当的助词" class="headerlink" title="1.在()里填写适当的助词"></a>1.在()里填写适当的助词</h2><ul>
-<li>1).水道局(に)かび臭い、濁っているなどの苦情が寄せられた。</li>
-<li>2).安全な水が飲めるかもしれないという期待(が)高まりつつある。</li>
-<li>3).契約は今月限り(に)してほしいと担当者が言っている。</li>
-<li>4).先生の指導(の)もと、選手たちの記録はどんどん伸びた。</li>
-<li>5).森林に降った雨は、やがて土(に)染み込む。</li>
-</ul>
-<mark class="label ">に　が　に　の　に</mark>
-
-<h2 id="2-写出画线部分平假名的日语汉字"><a href="#2-写出画线部分平假名的日语汉字" class="headerlink" title="2.写出画线部分平假名的日语汉字"></a>2.写出画线部分平假名的日语汉字</h2><p>1)新聞社に意見を<u>よせる</u>[寄せる]　　 2)水が<u>にごって</u>いる[濁って]<br>3)カバンに荷物を<u>つめる</u>[詰める]　　 4)微生物を<u>とりのぞく</u>[取り除く]<br>5)靴を<u>とりかえる</u>[取り替える]　　 6)土砂が<u>ながれこむ</u>[流れ込む]<br>7)<u>しせつ</u>が古くなる[施設]　　 8)電車が<u>つうか</u>する[通過]<br>9)お湯を<u>わかす</u>[沸かす]　　 10)分かり<u>しだい</u>連絡する[次第]<br>11)水が<u>おせん</u>される[汚染]　　 12)地震に備えて米を<u>たくわえる</u>[蓄える]</p>
-<h2 id="3-阅读课文，回答问题"><a href="#3-阅读课文，回答问题" class="headerlink" title="3.阅读课文，回答问题"></a>3.阅读课文，回答问题</h2><ul>
-<li>1)かつての東京の水道水はどうでしたか。<ul>
-<li>「まずい水」でした。</li>
-</ul>
-</li>
-<li>2)東京でおいしくて安全な水が飲めるように、水道局が行った２つの取組みは何ですか。<ul>
-<li>貯水池や河川の水質管理、浄水処理施設の改善を行いました。</li>
-</ul>
-</li>
-<li>3)水源の森林の働きは何ですか。<ul>
-<li>森林は、水道水のものになるきれいな水を作る一方で、土砂がダムに流れ込まないようにする働きをしています。</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-阅读下列句子，用适当的动词变成适当的形式写入画线处"><a href="#4-阅读下列句子，用适当的动词变成适当的形式写入画线处" class="headerlink" title="4. 阅读下列句子，用适当的动词变成适当的形式写入画线处"></a>4. 阅读下列句子，用适当的动词变成适当的形式写入画线处</h2><ul>
-<li>【例】土曜日にギターを使いので、週末に<u>間に合う</u>ように送ってください。</li>
-<li>1)ピアノの練習は大変だが、だいぶ<u>弾ける</u>ようになってきた。</li>
-<li>2)「瓶にひびが<u>入らない</u>ように注意して運んでください。」</li>
-<li>3)森さんは遅刻が多いので、部長に会社に<u>遅れない</u>よう注意された。</li>
-<li>4)先生の顔がよく<u>見える</u>ように前のほうに座ることにしている。</li>
-<li>5)台風が近づいているので、早く家に<u>帰る</u>よう息子に電話をした。</li>
-<li>6)二度とこのようなミスが<u>起きない</u>よう十分調査しなければならない。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E8%AF%BE%E6%96%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日中下19课文</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-04-01 10:43:53" itemprop="dateCreated datePublished" datetime="2022-04-01T10:43:53+09:00">2022-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>4k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>7 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="19-「水道水」の話"><a href="#19-「水道水」の話" class="headerlink" title="19 「水道水」の話"></a>19 「水道水」の話</h1><h2 id="「水道水」の話"><a href="#「水道水」の話" class="headerlink" title="「水道水」の話"></a>「水道水」の話</h2><article>
-    <div style='text-indent:2em;'>東京の水道水は、かつて「まずい水」の代名詞だった。かび臭い、濁っているなどの苦情が水道局に寄せられ、浄水器をつけたり、一度沸かしてから飲んだりする人が多かった。</div>
-    <div style='text-indent:2em;'>ところが、子の水道水が変わりつつある。東京都庁の売店には、大手飲料メーカーのミネラルウォーターのボトルの間に、都の水道局が販売する「東京水」が並ぶ。</div>
-    <div style='text-indent:2em;'>ラベルには「原材料名：水(水道水)」とある。都内の浄水場で処理した水をボトルに詰めて販売していて、味もおいしいと評判だ。この「東京水」の販売は東京都水道局が進めている「安全でおいしい水プロジェクト」キャンペーンの１つだ。</div>
-    <div style='text-indent:2em;'>キャンペーンでは、貯水池ならびに河川の水質管理、浄水処理施設の改善などさまざまな取り組みを行っている。1992年には金町浄水場(葛飾区)に、オゾンや活性炭を使って微生物などを取り除く特別な装置を導入した。さらに、マンションの貯水槽や水道管が古くなって、浄水場から運ばれる水が汚染されてしまうこともあるため水道局では水道管や貯水槽を調査したり、取り替えたりしている。これらの対策が進むのに伴って、おいしくて安全な水を届けることができるようになってきた。</div>
-    <div style='text-indent:2em;'>さらに、キャンペーンのもと、水源の森林を守るための取り組みも進んでいる森林に降った雨は、地面に積もった落ち葉をゆっくりと通過し、土に染み込み、そして、川に少しずつ流れ込む。森林は、水道水のもとになるうきれいな水を作る一方で、土砂がダムに流れ込まないようにする働きをしている。この「緑のダム」ともいえる森林を守り、育てることによって、いつか、ミネラルウォーターよりもおいしくて、安全な水が飲めるかもしれない。そんな期待が高まりつつある。</div>
-</article>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/01/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B19%E8%AF%BE%E6%96%87/#more" rel="contents">
+              <a class="btn" href="/2022/04/09/%E6%96%B0%E6%A0%87%E6%97%A5%E4%B8%AD%E4%B8%8B26%E8%AF%BE%E6%96%87/#more" rel="contents">
                 続きを読む &raquo;
               </a>
             </div>
@@ -1048,7 +1980,7 @@
 
 
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
   </nav>
 
 </div>
@@ -1072,14 +2004,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>単語の総数：</span>
-    <span title="単語の総数">611k</span>
+    <span title="単語の総数">693k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>読書の合計時間 &asymp;</span>
-    <span title="読書の合計時間">16:59</span>
+    <span title="読書の合計時間">19:15</span>
   </span>
 </div>
 
