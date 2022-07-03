@@ -160,18 +160,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-count">345</span>
           <span class="site-state-item-name">ポスト</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">カテゴリ</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">254</span>
+        <span class="site-state-item-count">255</span>
         <span class="site-state-item-name">タグ</span></a>
       </div>
   </nav>
@@ -233,6 +233,462 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Docker的常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2022-01-25 15:24:48" itemprop="dateCreated datePublished" datetime="2022-01-25T15:24:48+09:00">2022-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>29 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Docker的常用命令"><a href="#Docker的常用命令" class="headerlink" title="Docker的常用命令"></a>Docker的常用命令</h1><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><pre class="language-shell" data-language="shell"><code class="language-shell">docker version # 显示 docker 的版本信息
+docker info # 显示 docker 的系统信息，包括镜像和容器数量
+docker 命令 --help</code></pre>
+
+<p>帮助文档的地址：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline">https://docs.docker.com/engine/reference/commandline</a></p>
+<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><p><strong>docker images</strong> 查看所有本地的主机上的镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage: docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+List images
+
+Options:
+  -a, --all             # Show all images (default hides intermediate images)
+      --digests         # Show digests
+  -f, --filter filter   # Filter output based on conditions provided
+      --format string   # Pretty-print images using a Go template
+      --no-trunc        # Don&#39;t truncate output
+  -q, --quiet           # Only show image IDs
+
+
+[lixun@aliecs ~]$ sudo docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   4 months ago   13.3kB
+
+# 解释
+REPOSITORY      # 镜像的仓库源
+TAG             # 镜像的标签
+IMAGE ID        # 镜像的ID
+CREATED         # 镜像的创建时间
+SIZE            # 镜像的大小
+</code></pre>
+
+<p><strong>docker search</strong> 搜索镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker search [OPTIONS] TERM
+
+Search the Docker Hub for images
+
+Options:
+  -f, --filter filter   # Filter output based on conditions provided
+      --format string   # Pretty-print search using a Go template
+      --limit int       # Max number of search results (default 25)
+      --no-trunc        # Don&#39;t truncate output
+
+[lixun@aliecs ~]$ sudo docker search mysql
+NAME             DESCRIPTION                             STARS   OFFICIAL  AUTOMATED
+mysql    MySQL is a widely used, open-source relation…   12013     [OK]       
+mariadb  MariaDB Server is a high performing open sou…   4603      [OK] 
+</code></pre>
+
+<p><strong>docker pull</strong> 下载镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+Options:
+  -a, --all-tags                # Download all tagged images in the repository
+      --disable-content-trust   # Skip image verification (default true)
+      --platform string         # Set platform if server is multi-platform capable
+  -q, --quiet                   # Suppress verbose output
+
+
+[lixun@aliecs ~]$ sudo docker pull mysql
+Using default tag: latest # 不指定 tag，默认 latest
+latest: Pulling from library&#x2F;mysql
+72a69066d2fe: Pull complete # 分层下载，docker images 的核心 联合文件系统
+93619dbc5b36: Pull complete 
+99da31dd6142: Pull complete 
+e5c707858ec0: Pull complete 
+fc41578cbf60: Pull complete 
+4785d896ef10: Pull complete 
+7d250cdc93be: Pull complete 
+309700f41983: Pull complete 
+45fd33301836: Pull complete 
+92f970c68b71: Pull complete 
+bb3544339a9e: Pull complete 
+f66ddf4c43fa: Pull complete 
+Digest: sha256:d0507b008897c39f6cbc76285af1171d4551988475e00e91344060023cd9c553 # 签名
+Status: Downloaded newer image for mysql:latest
+docker.io&#x2F;library&#x2F;mysql:latest # 真实地址
+
+# 
+docker pull mysql ↔ docker pull docker.io&#x2F;library&#x2F;mysql:latest
+
+# 指定 tag
+[lixun@aliecs ~]$ sudo docker pull mysql:5.7
+5.7: Pulling from library&#x2F;mysql
+72a69066d2fe: Already exists 
+93619dbc5b36: Already exists 
+99da31dd6142: Already exists 
+e5c707858ec0: Already exists 
+fc41578cbf60: Already exists 
+4785d896ef10: Already exists 
+7d250cdc93be: Already exists 
+2efe6ef3579a: Pull complete 
+40dc4a5ca43a: Pull complete 
+cd6f90222f59: Pull complete 
+031e631e9021: Pull complete 
+Digest: sha256:66480693e01295d85954bb5dbe2f41f29ebceb57d3d8098ea0c9d201473f2d8b
+Status: Downloaded newer image for mysql:5.7
+docker.io&#x2F;library&#x2F;mysql:5.7
+</code></pre>
+
+<p><strong>docker rmi</strong> 删除镜像</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+
+Options:
+  -f, --force      # Force removal of the image
+      --no-prune   # Do not delete untagged parents
+
+[lixun@aliecs ~]$ docker rmi -f 42f82e150ec2 # 删除指定
+[lixun@aliecs ~]$ docker rmi -f 42f82e150ec2 feb5d9fea6a5 # 删除多个
+[lixun@aliecs ~]$ docker rmi -f $(dcoker images -aq) # 删除所有容器</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/25/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                続きを読む &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E5%8A%9F%E8%83%BD%E7%94%A8%E8%AF%AD%C2%B7%E5%8F%A5%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E5%8A%9F%E8%83%BD%E7%94%A8%E8%AF%AD%C2%B7%E5%8F%A5%E5%9E%8B/" class="post-title-link" itemprop="url">n3-重点语法-功能用语·句型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2022-01-23 23:45:13" itemprop="dateCreated datePublished" datetime="2022-01-23T23:45:13+09:00">2022-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-04-05 23:16:58" itemprop="dateModified" datetime="2022-04-05T23:16:58+09:00">2022-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>30 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="功能用语·句型"><a href="#功能用语·句型" class="headerlink" title="功能用语·句型"></a>功能用语·句型</h1><h2 id="◯-あまり"><a href="#◯-あまり" class="headerlink" title="◯ あまり"></a>◯ あまり</h2><ul>
+<li><strong>接续：</strong>（1）あまりの～名 + に</li>
+<li><strong>意义：</strong> 程度的过甚. “因为过于…”、”因为太…”.<br><strong>あまりの美しさに息を飲んだ。</strong><br>为美丽的景色而惊叹.<br><strong>あまりの悲しさに涙を流した。</strong><br>由于过于悲伤，竟然哭起来了.</li>
+<li><strong>接续：</strong>（2）名「の」/动「辞」 + あまり(に)</li>
+<li><strong>意义：</strong> 程度的过甚. “由于过于…”、”由于太…”.<br><strong>感動のあまり、声を上げて泣いた。</strong><br>由于太激动，竟然放声大哭起来.<br><strong>試験の結果を気にするあまりに、夜眠れなくなってしまった。</strong><br>由于太担心考试的结果，夜不能寐.</li>
+</ul>
+<h2 id="◯-～以上"><a href="#◯-～以上" class="headerlink" title="◯ ～以上"></a>◯ ～以上</h2><ul>
+<li><strong>接续：</strong>（1）名/动「た」+ 以上</li>
+<li><strong>意义：</strong> 超出某数量、基准、程度、预测等. “超出…”.<br><strong>銀行から三百万円以上のお金を借りている。</strong><br>从银行贷款了三百多万日元.<br><strong>参加者は３００人もいて、予測した以上だった。</strong><br>与会者有300多人，超出了我们的预测.</li>
+<li><strong>接续：</strong>（2）名/动「た」+ 以上に</li>
+<li><strong>意义：</strong> 和「～より」同义，表示结果超出想象. “超出…”.<br><strong>新幹線は想像以上にスピードが速いですね。</strong><br>新干线的车速比我想象得要快啊.<br><strong>N3試験は思った以上に難しかったです。</strong><br>N3考题比预想得难.</li>
+<li><strong>接续：</strong>（3）こ(そ・あ)れ + 以上～ない　名 + 以上(のこと)～ない　动 + 以上(のこと)～ない</li>
+<li><strong>意义：</strong> 没有必要或没有达到超出该名词或动词所示的程度. “没有再…”、”不能再…”.<br><strong>足がもう痛くてたまらない。これ以上はもう歩けない。</strong><br>脚疼痛难忍.我再也走不动了.<br><strong>子供に必要以上のお金を与えてはならない。</strong><br>不要给孩子太多的钱.</li>
+</ul>
+<h2 id="◯-～以来"><a href="#◯-～以来" class="headerlink" title="◯ ～以来"></a>◯ ～以来</h2><ul>
+<li><strong>接续：</strong> 名/动「て」+ 以来</li>
+<li><strong>意义：</strong> 表示有史以来第一次的经历.<br><strong>私は入社以来１０年、一度も遅刻をしたことがない。</strong><br>自打上班以来，这10年间我从来没有迟到过.<br><strong>こんな思い病気にかかったのは生まれて以来はじめてだ。</strong><br>生这么重的病，是我有生以来头一回.</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E5%8A%9F%E8%83%BD%E7%94%A8%E8%AF%AD%C2%B7%E5%8F%A5%E5%9E%8B/#more" rel="contents">
+                続きを読む &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E6%8E%A5%E5%B0%BE%E8%AF%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gawr Gura">
+      <meta itemprop="description" content="あ、サメです。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gawr Gura">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E6%8E%A5%E5%B0%BE%E8%AF%8D/" class="post-title-link" itemprop="url">n3-重点语法-接尾词</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">投稿日</span>
+
+      <time title="作成日：2022-01-23 16:27:25" itemprop="dateCreated datePublished" datetime="2022-01-23T16:27:25+09:00">2022-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">編集日</span>
+      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">カテゴリ</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/N5-N1%E8%AF%AD%E6%B3%95%E4%B8%80%E6%9C%AC%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">N5-N1语法一本通</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="単語数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">単語数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="読書の時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">読書の時間 &asymp;</span>
+      <span>3 分</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="接尾词"><a href="#接尾词" class="headerlink" title="接尾词"></a>接尾词</h1><h2 id="◯-～がない"><a href="#◯-～がない" class="headerlink" title="◯ ～がない"></a>◯ ～がない</h2><ul>
+<li><strong>接续：</strong> 动「连」+ がない</li>
+<li><strong>意义：</strong> 表示该动作很难做到. “难以…”、”不能…”.<br><strong>その計画は成功したとは言いがたい。</strong><br>很难说那个计划已经获得了成功.<br><strong>どのコンピュータ(ko.n.pyu-.ta)を買ったらよいか、なかなか一つには決めがたい。</strong><br>到底买哪种电脑好，一时难以决定.</li>
+</ul>
+<h2 id="◯-～がち"><a href="#◯-～がち" class="headerlink" title="◯ ～がち"></a>◯ ～がち</h2><ul>
+<li><strong>接续：</strong> 名/动「连」+ がち</li>
+<li><strong>意义：</strong> 表示不好的状态常常会出现或不好的事情容易发生. “动辄就…”.<br><strong>先日、病気がちのおばを見舞いに行った。</strong><br>前两天去探望了老病号，就是我阿姨.<br><strong>結婚して何十年も立つと、結婚記念日さえ忘れがちになる。</strong><br>结婚后经过数十年，往往连结婚纪念日都会忘记.</li>
+</ul>
+<h2 id="◯-～ぎみ"><a href="#◯-～ぎみ" class="headerlink" title="◯ ～ぎみ"></a>◯ ～ぎみ</h2><ul>
+<li><strong>接续：</strong> 名/动「连」+ 気味[ぎみ]</li>
+<li><strong>意义：</strong> 虽然程度不高，但总觉得最近有点这种迹象. “感觉有点…”.<br><strong>今日は風邪ぎみだから、家にいよう。</strong><br>今天我有点感冒，所以就待在家里吧.<br><strong>少し疲れぎみだから、早く寝た。</strong><br>感觉有点累，所以早早地就睡了.</li>
+</ul>
+<h2 id="◯-～っぽい"><a href="#◯-～っぽい" class="headerlink" title="◯ ～っぽい"></a>◯ ～っぽい</h2><ul>
+<li><strong>接续：</strong> 名/ナ「词干」/イ「词干」/动「连」+ っぽい</li>
+<li><strong>意义：</strong> 表示前项的人或事情给人的感觉多少带有某种迹象。多用于负面评价. “总觉得有点…(不好的倾向)”.<br><strong>叔父の持ちんだ儲け話は、どうも噓っぽいです。</strong><br>叔叔谈论的有关赚钱的话题里面，我总觉得有点掺假的成分.<br><strong>本棚の本の背が日に焼けて白っぽくなった。</strong><br>书架上的书，由于阳光的照射，书脊有些发白了.</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/23/n3-%E9%87%8D%E7%82%B9%E8%AF%AD%E6%B3%95-%E6%8E%A5%E5%B0%BE%E8%AF%8D/#more" rel="contents">
+                続きを読む &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -775,523 +1231,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">新标日初上24语法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-01-21 15:56:05" itemprop="dateCreated datePublished" datetime="2022-01-21T15:56:05+09:00">2022-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-05 23:16:59" itemprop="dateModified" datetime="2022-04-05T23:16:59+09:00">2022-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>3 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="24-李さんは-もう-すぐ-来ると-思います"><a href="#24-李さんは-もう-すぐ-来ると-思います" class="headerlink" title="24 李さんは　もう　すぐ　来ると　思います"></a>24 李さんは　もう　すぐ　来ると　思います</h1><h2 id="简体小句-と思います"><a href="#简体小句-と思います" class="headerlink" title="简体小句 + と思います"></a>简体小句 + と思います</h2><p><code>田中さんは　来ないと　思います。</code><br><strong>と</strong>：格助词，引用思想内容。</p>
-<p><strong>简体句 + と思います</strong>：用于表示说话人对某一事物的主观判断和意见。<br>译为”我认为…” “我想…” “我觉得…”</p>
-<p><code>李さんは来月日本へ行きます。</code><br><code>わたしは李さんが来月日本へ行くと思います。</code><br><code>李さんは来月日本へ行くと思います。</code></p>
-<h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><p><code>明日は雨が降りません。　→</code><br><code>明日は雨が降らないと思います。</code></p>
-<p><code>午後、忙しいです。　→</code><br><code>午後、忙しいと思います。</code></p>
-<p><code>携帯電話は便利です。　→</code><br><code>携帯電話は便利だと思います。</code></p>
-<p><code>李さんは病気でした。　→</code><br><code>李さんは病気だったと思います。</code></p>
-<h3 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h3><p><code>森さんは中国語を話すことができます。　→</code><br><code>森さんは中国語を話すことができると思います。</code></p>
-<p><code>韓国語の勉強はおもしろいです。　→</code><br><code>韓国語の勉強はおもしろいと思います。</code></p>
-<p><code>小野さんは李さんより上手でした。　→</code><br><code>小野さんは李さんより上手だったと思います。</code></p>
-<hr>
-<p><strong>当讨论意见或观点是，固定使用：</strong><code>～についてどう思いますか</code></p>
-<h3 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h3><img src="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/1.jpg" class="" width="250" title="example1" alt="きれいです&#x2F;おいしいです">
-<p><code>日本料理についてどう思いますか。（きれいです/おいしいです）</code><br><code>きれいでおいしいと思います。</code></p>
-<h3 id="練習-1"><a href="#練習-1" class="headerlink" title="練習"></a>練習</h3><img src="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/2.jpg" class="" width="250" title="練習1" alt="安いです&#x2F;おいしいです">
-<p><code>この居酒屋についてどう思いますか。（安いです/おいしいです）</code><br><code>安くておいしいと思います。</code></p>
-<img src="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/3.jpg" class="" width="250" title="練習2" alt="簡単です&#x2F;便利です">
-<p><code>このコンピュータについてどう思ういますか。（簡単です/便利です）</code><br><code>簡単で便利だと思います。</code></p>
-<hr>
-<p><strong>注意</strong>：表示对他人意见的赞同或反对时多为固定用法。<br><code>Q：この映画はおもしろいですね。</code><br><code>A：わたしもそう思います。</code><br><code>A：わたしもそう思いません。</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E7%94%9F%E8%AF%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E7%94%9F%E8%AF%8D/" class="post-title-link" itemprop="url">新标日初上24生词</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-01-21 15:55:54" itemprop="dateCreated datePublished" datetime="2022-01-21T15:55:54+09:00">2022-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-04-07 22:12:53" itemprop="dateModified" datetime="2022-04-07T22:12:53+09:00">2022-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>2 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="24-李さんは-もう-すぐ-来ると-思います"><a href="#24-李さんは-もう-すぐ-来ると-思います" class="headerlink" title="24 李さんは　もう　すぐ　来ると　思います"></a>24 李さんは　もう　すぐ　来ると　思います</h1><table>
-<thead>
-<tr>
-<th align="center">日文</th>
-<th align="center">词性</th>
-<th align="center">中文</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ハイキング１</td>
-<td align="center">名</td>
-<td align="center">郊游，远足</td>
-</tr>
-<tr>
-<td align="center">おわかれ(お別れ)０</td>
-<td align="center">名</td>
-<td align="center">分别，分手</td>
-</tr>
-<tr>
-<td align="center">はなし(話)３</td>
-<td align="center">名</td>
-<td align="center">说话</td>
-</tr>
-<tr>
-<td align="center">みおくり(見送り)０</td>
-<td align="center">名</td>
-<td align="center">送行，送别</td>
-</tr>
-<tr>
-<td align="center">あいだ(間)０</td>
-<td align="center">名</td>
-<td align="center">时间，期间</td>
-</tr>
-<tr>
-<td align="center">ほうりつ(法律)０</td>
-<td align="center">动1</td>
-<td align="center">法律</td>
-</tr>
-<tr>
-<td align="center">おもいます(思います)４「思う」</td>
-<td align="center">动1/五他</td>
-<td align="center">想，思考</td>
-</tr>
-<tr>
-<td align="center">いいます(言います)３「言う」</td>
-<td align="center">动1/五自他</td>
-<td align="center">说，讲</td>
-</tr>
-<tr>
-<td align="center">さがします(探します)４「探す」</td>
-<td align="center">动1/五他</td>
-<td align="center">找，寻找，寻求</td>
-</tr>
-<tr>
-<td align="center">わらいます(笑います)４「笑う」</td>
-<td align="center">动1/五自他</td>
-<td align="center">笑</td>
-</tr>
-<tr>
-<td align="center">やめます(止めます・辞めます)５「やめる」</td>
-<td align="center">动2/一他</td>
-<td align="center">戒，停止；放弃</td>
-</tr>
-<tr>
-<td align="center">きめます(決めます)３「決める」</td>
-<td align="center">动2/一他</td>
-<td align="center">决定</td>
-</tr>
-<tr>
-<td align="center">きまります(決まります)４「決まる」</td>
-<td align="center">动1/五自</td>
-<td align="center">决定，规定</td>
-</tr>
-<tr>
-<td align="center">ねぼうします(寝坊します)５「寝坊する」</td>
-<td align="center">动3/サ変自</td>
-<td align="center">睡懒觉</td>
-</tr>
-<tr>
-<td align="center">がいしゅつします(外出します)６「外出する」</td>
-<td align="center">动3/サ変自</td>
-<td align="center">外出，出去</td>
-</tr>
-<tr>
-<td align="center">けんきゅうします(研究します)６「研究する」</td>
-<td align="center">动3/サ変他</td>
-<td align="center">研究</td>
-</tr>
-<tr>
-<td align="center">おかしい３</td>
-<td align="center">形1</td>
-<td align="center">可笑，滑稽</td>
-</tr>
-<tr>
-<td align="center">すごい２</td>
-<td align="center">形1</td>
-<td align="center">惊人的，了不起</td>
-</tr>
-<tr>
-<td align="center">いっぱい０</td>
-<td align="center">副</td>
-<td align="center">满</td>
-</tr>
-<tr>
-<td align="center">とうとう１</td>
-<td align="center">副</td>
-<td align="center">终于，终究，到底</td>
-</tr>
-<tr>
-<td align="center">かならず(必ず)０</td>
-<td align="center">副</td>
-<td align="center">一定，必定</td>
-</tr>
-<tr>
-<td align="center">ぜったいに(絶対に)０</td>
-<td align="center">副</td>
-<td align="center">绝对</td>
-</tr>
-<tr>
-<td align="center">ば(馬)１</td>
-<td align="center">专</td>
-<td align="center">马</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">おせわになりました(お世話になりました)</td>
-<td align="center"></td>
-<td align="center">承蒙照顾</td>
-</tr>
-<tr>
-<td align="center">よろしくおつたえください(よろしくお伝えください)４＋７</td>
-<td align="center"></td>
-<td align="center">请代问好</td>
-</tr>
-<tr>
-<td align="center">おげんきで(お元気で)２</td>
-<td align="center"></td>
-<td align="center">请多保重</td>
-</tr>
-<tr>
-<td align="center">おきをつけて(お気を付けて)０</td>
-<td align="center"></td>
-<td align="center">小心点儿</td>
-</tr>
-<tr>
-<td align="center">さようなら５</td>
-<td align="center"></td>
-<td align="center">再见</td>
-</tr>
-<tr>
-<td align="center">どうやって１</td>
-<td align="center"></td>
-<td align="center">怎样，如何</td>
-</tr>
-<tr>
-<td align="center">やくにたちます(役に立ちます)</td>
-<td align="center"></td>
-<td align="center">有用</td>
-</tr>
-<tr>
-<td align="center">おなかがいっぱいです９</td>
-<td align="center"></td>
-<td align="center">吃饱，饱</td>
-</tr>
-<tr>
-<td align="center">～中/～について</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/21/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A24%E7%94%9F%E8%AF%8D/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://naruseshiroha.github.io/2022/01/20/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A23%E8%AF%BE%E6%96%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Gawr Gura">
-      <meta itemprop="description" content="あ、サメです。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gawr Gura">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/20/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A23%E8%AF%BE%E6%96%87/" class="post-title-link" itemprop="url">新标日初上23课文</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">投稿日</span>
-
-      <time title="作成日：2022-01-20 19:42:40" itemprop="dateCreated datePublished" datetime="2022-01-20T19:42:40+09:00">2022-01-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">編集日</span>
-      <time title="修正日：2022-02-17 11:51:51" itemprop="dateModified" datetime="2022-02-17T11:51:51+09:00">2022-02-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">カテゴリ</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%96%B0%E6%A0%87%E6%97%A5/" itemprop="url" rel="index"><span itemprop="name">新标日</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="単語数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">単語数：</span>
-      <span>754</span>
-    </span>
-    <span class="post-meta-item" title="読書の時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">読書の時間 &asymp;</span>
-      <span>1 分</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="23-休みの-日、散歩したり-買い物に-行ったり-します"><a href="#23-休みの-日、散歩したり-買い物に-行ったり-します" class="headerlink" title="23 休みの　日、散歩したり　買い物に　行ったり　します"></a>23 休みの　日、散歩したり　買い物に　行ったり　します</h1><h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ul>
-<li>1.李さんは　休みの　日、散歩したり　買い物に　行ったり　します。</li>
-<li>2.日本語の　先生は　中国人だったり　日本字だったりです。</li>
-<li>3.わたしは　今年の夏は、北京へ　行くか　どうか　分かりません。</li>
-<li>4.かぎが　どこに　あるか　教えて　ください。。</li>
-</ul>
-<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p><code>甲：週末に　何を　しましたか。</code><br><code>乙：スケートを　したり、ボーリングを　したり　しました。</code></p>
-<p><code>甲：北京まで、飛行機の　チケットは　いくらぐらいですか。</code><br><code>乙：季節に　よって　高かったり　安かったりです。</code></p>
-<p><code>甲：李さん、仕事は　忙しいですか。</code><br><code>乙：ええ、日に　よって　暇だったり　忙しかったりです。</code></p>
-<p><code>甲：森さんが　何時ごろ　来るか　知って　いますか。</code><br><code>乙：いいえ。今日は　来るか　どうか　分かりません。</code></p>
-<h2 id="送別会"><a href="#送別会" class="headerlink" title="送別会"></a>送別会</h2><p><code>森：小野さん、何を　買うか　決まりましたか。</code><br><code>小野：浴衣は　どうですか。</code><br><code>森：いいですね。でも、高くないですか。</code><br><code>小野：高かったり　安かったり、いろいろ　あります。あっ、そうだ。生地を　買って、わたしが　作りますよ。</code></p>
-<p><code>吉田：日本の　生活は　どうでしたか。</code><br><code>李：温泉に　入ったり　歌舞伎を　見たり　して、とても　楽しかったです。</code><br><code>吉田：ご両親に　いつ　帰るか　知らせましたか。</code><br><code>李：はい、昨日　母に　メールで　知らせました。</code><br><code>森：ご両親は　メールが　できますか。</code><br><code>李：母は　できますが、父は　電話が　手紙ですね。</code><br><code>小野：北京へ　帰った　後、どうしますか。</code><br><code>李：一週間ぐらい　休みたいですね。春節に　休みが　なかったですから。</code><br><code>小野：休みに　何を　しますか。旅行に　行きますか。</code><br><code>李：旅行に　行くか　どうか、わかりません。たぶん　友達に　会ったり、食事に　行ったり　します。</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/20/%E6%96%B0%E6%A0%87%E6%97%A5%E5%88%9D%E4%B8%8A23%E8%AF%BE%E6%96%87/#more" rel="contents">
-                続きを読む &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="前のページ"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
+    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="前のページ"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="次のページ"></i></a>
   </nav>
 
 </div>
@@ -1315,14 +1256,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>単語の総数：</span>
-    <span title="単語の総数">693k</span>
+    <span title="単語の総数">698k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>読書の合計時間 &asymp;</span>
-    <span title="読書の合計時間">19:15</span>
+    <span title="読書の合計時間">19:24</span>
   </span>
 </div>
 
